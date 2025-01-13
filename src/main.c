@@ -9,8 +9,6 @@
 #include <stdbool.h>
 #include <stdint.h>
 
-#include <string.h>
-
 static void UART_init(void);
 static void sysclk_init(void);
 static void Error_Handler(void);
@@ -30,6 +28,8 @@ int main(void)
   }
 
   memmove(&buffer[0], &buffer[0x10], ENTRY_LEN);
+
+  // memset(&buffer[0], 0xAA, ENTRY_LEN);
 
 
   println_("hello world!");

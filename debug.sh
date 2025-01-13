@@ -9,7 +9,7 @@ echo "START debug.sh"
 # also disable confirmations so you can quit by just using "q"
 gdb-multiarch -ex "set confirm off" \
     -ex "target extended-remote /dev/ttyACM0" -ex "monitor swd_scan" \
-    -ex "attach 1" -ex "load" -ex "break main" \
+    -ex "attach 1" -ex "load" -ex "break main" -ex "tui enable" \
     bin/memmovesrc.elf
 
 echo "DONE"

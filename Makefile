@@ -53,7 +53,7 @@ DEFINES += USE_FULL_LL_DRIVER
 # sets OPTIMIZE_FLAGS based on debug above
 ifeq ($(debug), 1)
 	DEFINES += DEBUG
-	OPTIMIZE_FLAGS = -O0
+	OPTIMIZE_FLAGS = -O0 -ggdb3
 else
 # change optimization options to whatever suits you
 	DEFINES += RELEASE
@@ -93,9 +93,8 @@ COMMON_FLAGS += $(FLOAT_FLAGS)
 # define flags
 COMMON_FLAGS += $(DEFINE_FLAGS)
 # use no system libraries
-# COMMON_FLAGS += --specs=nosys.specs
-COMMON_FLAGS += --specs=nano.specs
-# COMMON_FLAGS += -nostdlib
+COMMON_FLAGS += --specs=nosys.specs
+COMMON_FLAGS += -nostdlib
 # use no builtin functions 
 # this prevent gcc from optimizing printf() if you decide to roll your own
 COMMON_FLAGS += -fno-builtin
