@@ -8,10 +8,10 @@
   @ align the next variable or instruction on a 2-byte boundary
   .align 2
   @ make the symbol visible to the linker
-  .global memmove_orig
+  .global memmove2
   @ marks the symbol as being a function name
-  .type memmove_orig, STT_FUNC
-memmove_orig:
+  .type memmove2, STT_FUNC
+memmove2:
 	@ r0 = destination addr
 	@ r1 = source addr
 	@ r2 = num bytes
@@ -49,5 +49,5 @@ memmove_orig:
   pop   {r4}            @ restore previous value of r4
   bx    lr              @ exit function
 
-  .size memmove_orig, . - memmove_orig
+  .size memmove2, . - memmove2
 

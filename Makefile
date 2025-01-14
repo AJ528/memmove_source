@@ -3,7 +3,7 @@
 
 # set debug to 0 or 1
 # adjust optimization flag accordingly below
-debug = 1
+debug = 0
 
 # set fpu to soft, softfp or hard
 # soft is also for when you aren't using the FPU
@@ -57,7 +57,7 @@ ifeq ($(debug), 1)
 else
 # change optimization options to whatever suits you
 	DEFINES += RELEASE
-	OPTIMIZE_FLAGS = -O2
+	OPTIMIZE_FLAGS = -Os
 endif
 
 
@@ -94,7 +94,7 @@ COMMON_FLAGS += $(FLOAT_FLAGS)
 COMMON_FLAGS += $(DEFINE_FLAGS)
 # use no system libraries
 COMMON_FLAGS += --specs=nosys.specs
-COMMON_FLAGS += -nostdlib
+# COMMON_FLAGS += -nostdlib
 # use no builtin functions 
 # this prevent gcc from optimizing printf() if you decide to roll your own
 COMMON_FLAGS += -fno-builtin

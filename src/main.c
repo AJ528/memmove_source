@@ -6,14 +6,36 @@
 #include "stm32wlxx_ll_lpuart.h"
 #include "stm32wlxx_ll_utils.h"
 
+#include "stm32wlxx.h"
+
 #include <stdbool.h>
 #include <stdint.h>
+
+#include <string.h>
+#include <stddef.h>
 
 static void UART_init(void);
 static void sysclk_init(void);
 static void Error_Handler(void);
 
-static uint8_t buffer[256] = {0};
+
+#define BUFFER_SIZE 0x200
+#define ENTRY_LEN 100
+
+extern void* memset_orig(void *ptr, uint32_t value, uint32_t num);
+extern void* memmove_orig(void *destination, const void *source, size_t num);
+extern void* memmove2(void *destination, const void *source, size_t num);
+
+static void test(void* (*f)(void *, const void *, size_t), char * func_name);
+static inline void enable_cycle_count(void);
+static inline uint32_t get_cycle_count(void);
+static void clear_buffer(uint8_t *buf, uint32_t size);
+static void set_buffer(uint8_t *buf);
+
+
+/* Global variables */
+
+// static uint8_t buffer[BUFFER_SIZE] = {0};
 
 
 int main(void)
@@ -21,27 +43,65 @@ int main(void)
   sysclk_init();
   UART_init();
 
-  #define ENTRY_LEN 10
+  enable_cycle_count();
 
-  for(int i=0; i < ENTRY_LEN; i++){
-    buffer[0x10 + i] = i;
-  }
+  // uint32_t start = get_cycle_count();
+  // memmove_orig(&buffer[0], &buffer[0x10], ENTRY_LEN);
+  // uint32_t stop = get_cycle_count();
 
-  memmove(&buffer[0], &buffer[0x10], ENTRY_LEN);
+  // printfln_("memmove_orig took %u cycles", stop-start);
 
-  // memset(&buffer[0], 0xAA, ENTRY_LEN);
+  test(memmove_orig, "memmove_orig");
+  test(memmove, "lib_memmove");
 
 
-  println_("hello world!");
+
 
   while (1)
   {
-    
-  	LL_mDelay(1000);
-
+  	// LL_mDelay(1000);
   }
 }
 
+static void test(void* (*f)(void *, const void *, size_t), char * func_name)
+{
+  uint8_t buffer[BUFFER_SIZE] = {0};
+  set_buffer(buffer);
+  uint32_t start = get_cycle_count();
+  f(&buffer[0x41], &buffer[0x40], ENTRY_LEN);
+  uint32_t stop = get_cycle_count();
+
+  printfln_("%s took %u cycles", func_name, stop-start);
+}
+
+static void clear_buffer(uint8_t *buf, uint32_t size)
+{
+  memset(buf, 0, size);
+}
+
+static void set_buffer(uint8_t *buf)
+{
+  for(int i=0; i < ENTRY_LEN; i++){
+    buf[0x40 + i] = i;
+  }
+}
+
+static inline void enable_cycle_count(void)
+{
+  CoreDebug->DEMCR |= CoreDebug_DEMCR_TRCENA_Msk;
+  DWT->CYCCNT = 0;
+  DWT->CTRL |= DWT_CTRL_CYCCNTENA_Msk;
+}
+
+static inline uint32_t get_cycle_count(void)
+{
+  return DWT->CYCCNT;
+}
+
+
+
+
+/* Communication Functions */
 
 int32_t putchar_(char c)
 {

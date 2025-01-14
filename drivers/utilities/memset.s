@@ -11,9 +11,9 @@
 @ ---------------------------------------------------------------------------
 	.thumb_func
 	.align 2
-	.global memset
-	.type memset, STT_FUNC
-memset:
+	.global memset_orig
+	.type memset_orig, STT_FUNC
+memset_orig:
 	@ r0 = address
 	@ r1 = character
 	@ r2 = count
@@ -93,4 +93,4 @@ memset:
 
 10:
 	bx	lr		@ goodbye
-	.size	memset, . - memset
+	.size	memset_orig, . - memset_orig
