@@ -37,10 +37,6 @@ static void clear_buffer(uint8_t *buf, uint32_t size);
 static void set_buffer(uint8_t *buf);
 
 
-/* Global variables */
-
-// static uint8_t buffer[BUFFER_SIZE] = {0};
-
 
 int main(void)
 {
@@ -49,17 +45,9 @@ int main(void)
 
   enable_cycle_count();
 
-  // uint32_t start = get_cycle_count();
-  // memmove_orig(&buffer[0], &buffer[0x10], ENTRY_LEN);
-  // uint32_t stop = get_cycle_count();
-
-  // printfln_("memmove_orig took %u cycles", stop-start);
   test(memmove_new, "memmove_new");
   test(memmove_orig, "memmove_orig");
   test(memmove, "lib_memmove");
-
-
-
 
   while (1)
   {
