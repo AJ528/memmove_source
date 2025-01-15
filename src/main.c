@@ -21,14 +21,18 @@ static void Error_Handler(void);
 
 #define BUFFER_SIZE 0x200
 #define ENTRY_LEN 100
+#define SRC_OFFSET 0x40
+#define DEST_OFFSET 0x3F
+
 
 extern void* memset_orig(void *ptr, uint32_t value, uint32_t num);
 extern void* memmove_orig(void *destination, const void *source, size_t num);
-extern void* memmove2(void *destination, const void *source, size_t num);
+extern void* memmove_new(void *destination, const void *source, size_t num);
 
 static void test(void* (*f)(void *, const void *, size_t), char * func_name);
 static inline void enable_cycle_count(void);
 static inline uint32_t get_cycle_count(void);
+static inline uint32_t get_LSU_count(void);
 static void clear_buffer(uint8_t *buf, uint32_t size);
 static void set_buffer(uint8_t *buf);
 
@@ -50,7 +54,7 @@ int main(void)
   // uint32_t stop = get_cycle_count();
 
   // printfln_("memmove_orig took %u cycles", stop-start);
-
+  test(memmove_new, "memmove_new");
   test(memmove_orig, "memmove_orig");
   test(memmove, "lib_memmove");
 
@@ -63,16 +67,24 @@ int main(void)
   }
 }
 
+
 static void test(void* (*f)(void *, const void *, size_t), char * func_name)
 {
   uint8_t buffer[BUFFER_SIZE] = {0};
   set_buffer(buffer);
-  uint32_t start = get_cycle_count();
-  f(&buffer[0x41], &buffer[0x40], ENTRY_LEN);
-  uint32_t stop = get_cycle_count();
 
-  printfln_("%s took %u cycles", func_name, stop-start);
+  uint32_t LSU_start = get_LSU_count();
+  uint32_t start = get_cycle_count();
+
+  f(&buffer[DEST_OFFSET], &buffer[SRC_OFFSET], ENTRY_LEN);
+
+  uint32_t stop = get_cycle_count();
+  uint32_t LSU_stop = get_LSU_count();
+
+  printfln_("%s took %u cycles and %u LSU cycles", func_name, stop-start, (uint8_t)(LSU_stop-LSU_start));
 }
+
+
 
 static void clear_buffer(uint8_t *buf, uint32_t size)
 {
@@ -82,7 +94,7 @@ static void clear_buffer(uint8_t *buf, uint32_t size)
 static void set_buffer(uint8_t *buf)
 {
   for(int i=0; i < ENTRY_LEN; i++){
-    buf[0x40 + i] = i;
+    buf[SRC_OFFSET + i] = i;
   }
 }
 
@@ -90,12 +102,18 @@ static inline void enable_cycle_count(void)
 {
   CoreDebug->DEMCR |= CoreDebug_DEMCR_TRCENA_Msk;
   DWT->CYCCNT = 0;
-  DWT->CTRL |= DWT_CTRL_CYCCNTENA_Msk;
+  DWT->LSUCNT = 0;
+  DWT->CTRL |= DWT_CTRL_CYCCNTENA_Msk | DWT_CTRL_LSUEVTENA_Msk;
 }
 
 static inline uint32_t get_cycle_count(void)
 {
   return DWT->CYCCNT;
+}
+
+static inline uint32_t get_LSU_count(void)
+{
+  return (DWT->LSUCNT) & 0xFF;
 }
 
 
