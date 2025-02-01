@@ -22,7 +22,7 @@ static void Error_Handler(void);
 #define BUFFER_SIZE 0x200
 #define ENTRY_LEN 100
 #define SRC_OFFSET 0x40
-#define DEST_OFFSET 0x3F
+#define DEST_OFFSET 0x41
 
 
 extern void* memset_orig(void *ptr, uint32_t value, uint32_t num);
@@ -48,6 +48,7 @@ int main(void)
   test(memmove_new, "memmove_new");
   test(memmove_orig, "memmove_orig");
   test(memmove, "lib_memmove");
+  print_newline();
 
   while (1)
   {
@@ -76,7 +77,7 @@ static void test(void* (*f)(void *, const void *, size_t), char * func_name)
 
 static void clear_buffer(uint8_t *buf, uint32_t size)
 {
-  memset(buf, 0, size);
+  memset_orig(buf, 0, size);
 }
 
 static void set_buffer(uint8_t *buf)
