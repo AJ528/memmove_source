@@ -1,22 +1,20 @@
 #include "mprintf.h"
+#include "greatest.h"
 
 #include "stm32wlxx_ll_bus.h"
 #include "stm32wlxx_ll_rcc.h"
 #include "stm32wlxx_ll_gpio.h"
 #include "stm32wlxx_ll_lpuart.h"
 #include "stm32wlxx_ll_utils.h"
-
 #include "stm32wlxx.h"
 
 #include <stdbool.h>
 #include <stdint.h>
-
 #include <string.h>
 #include <stddef.h>
 
 static void UART_init(void);
 static void sysclk_init(void);
-static void Error_Handler(void);
 
 
 #define BUFFER_SIZE 0x200
@@ -36,7 +34,8 @@ static inline uint32_t get_LSU_count(void);
 static void clear_buffer(uint8_t *buf, uint32_t size);
 static void set_buffer(uint8_t *buf);
 
-
+// Add definitions that need to be in the test runner's main file.
+GREATEST_MAIN_DEFS();
 
 int main(void)
 {
@@ -49,6 +48,10 @@ int main(void)
   test(memmove_orig, "memmove_orig");
   test(memmove, "lib_memmove");
   print_newline();
+
+  GREATEST_MAIN_BEGIN();  // command-line options, initialization.
+
+  GREATEST_MAIN_END();    // display results
 
   while (1)
   {
@@ -108,7 +111,7 @@ static inline uint32_t get_LSU_count(void)
 
 
 
-/* Communication Functions */
+/******* Communication Functions *******/
 
 int32_t putchar_(char c)
 {
@@ -172,25 +175,3 @@ static void UART_init(void)
 }
 
 
-static void Error_Handler(void)
-{
-  __disable_irq();
-  while (1)
-  {
-  }
-}
-
-#ifdef  USE_FULL_ASSERT
-/**
-  * @brief  Reports the name of the source file and the source line number
-  *         where the assert_param error has occurred.
-  * @param  file: pointer to the source file name
-  * @param  line: assert_param error line source number
-  * @retval None
-  */
-void assert_failed(uint8_t *file, uint32_t line)
-{
-  /* User can add his own implementation to report the file name and line number,
-     ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
-}
-#endif /* USE_FULL_ASSERT */
