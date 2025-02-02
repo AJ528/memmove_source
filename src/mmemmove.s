@@ -40,41 +40,43 @@ memmove_:
   tst   r1, #3          @ check if the source address is 4-byte aligned
   bne   quad_b_copy     @ if not, copy 4 bytes at a time
 
-  @ if there are 16 or more bytes to copy and the src and dest are 4-byte aligned, can copy word-wise
-quad_word_b_copy:
-  sub   r2, r2, #16     @ decrement remaining bytes by 4
-  ldr   r5, [r3, #-4]        @ load word from memory[r1] into r5
-  str   r5, [r4, #-4]        @ store r5 word into memory[r4]
-  ldr   r5, [r3, #-8]    @ load word from memory[r1+4] into r5
-  str   r5, [r4, #-8]    @ store r5 word into memory[r4+4]
-  ldr   r5, [r3, #-12]
-  str   r5, [r4, #-12]
-  ldr   r5, [r3, #-16]
-  str   r5, [r4, #-16]
-  cmp   r2, #16          @ check if there are 16 or more bytes to copy
-  sub   r3, r3, #16
-  sub   r4, r4, #16
-  bhs   quad_word_b_copy     @ if so, quad copy again
-  cmp   r2, #4          @ if there are 4 or more bytes to copy
-  bhs   quad_b_copy
-  cmp   r3, r1          @ check if we are at the final source address
-  bne   copy_bck_single @ if not, finish with single byte copying
-  b     exit            @ otherwise, exit
 
-quad_b_copy:            @ copy backwards 4 bytes at a time
-  sub   r2, r2, #4      @ decrement remaining bytes by 4
-  ldrb  r5, [r3, #-1]   @ load byte from memory[r3-1] into r5
-  strb  r5, [r4, #-1]   @ store r5 byte into memory[r4-1]
-  ldrb  r5, [r3, #-2]   @ load byte from memory[r3-2] into r5
-  strb  r5, [r4, #-2]   @ store r5 byte into memory[r4-2]
-  ldrb  r5, [r3, #-3]   @ continue for next 2 bytes
-  strb  r5, [r4, #-3]
-  ldrb  r5, [r3, #-4]
-  strb  r5, [r4, #-4]
-  cmp   r2, #4          @ check if there are 4 or more bytes to copy
-  sub   r4, r4, #4
-  sub   r3, r3, #4
-  bhs   quad_b_copy     @ if so, quad copy again
+.balign 8                   @ align the loop to an 8 byte boundary, also force encodings for speed/alignment
+  nop.n                     @ offset by 2 bytes so the LDR/STR instructions align nicely
+@ if there are 16 or more bytes to copy and the src and dest are 4-byte aligned, can copy word-wise
+quad_word_b_copy:
+  sub.w   r2, r2, #16       @ decrement remaining bytes by 4
+  cmp.n   r2, #16           @ check if there are 16 or more bytes to copy
+  ldr.w   r5, [r3, #-4]!    @ load word from memory[r3-4] into r5. r3 is decremented by 4
+  str.w   r5, [r4, #-4]!    @ store r5 word into memory[r4-4]. r4 is decremented by 4
+  ldr.w   r5, [r3, #-4]!    @ repeat 3 more times
+  str.w   r5, [r4, #-4]!
+  ldr.w   r5, [r3, #-4]!
+  str.w   r5, [r4, #-4]!
+  ldr.w   r5, [r3, #-4]!
+  str.w   r5, [r4, #-4]!
+  bhs.n   quad_word_b_copy  @ if there are 16+ bytes left, quad word copy again
+  cmp   r2, #4              @ if there are 4 or more bytes to copy
+  bhs   quad_b_copy
+  cmp   r3, r1              @ check if we are at the final source address
+  bne   copy_bck_single     @ if not, finish with single byte copying
+  b     exit                @ otherwise, exit
+
+
+.balign 8                 @ align the loop to an 8 byte boundary, also force encodings for speed/alignment
+  nop.n                   @ offset by 2 bytes so the LDR/STR instructions align nicely
+quad_b_copy:              @ copy backwards 4 bytes at a time
+  sub.w   r2, r2, #4      @ decrement remaining bytes by 4
+  cmp.n   r2, #4          @ check if there are 4 or more bytes to copy
+  ldrb.w  r5, [r3, #-1]!  @ load byte from memory[r3-1] into r5. r3 is decremented by 1
+  strb.w  r5, [r4, #-1]!  @ store r5 byte into memory[r4-1]. r4 is decremented by 1
+  ldrb.w  r5, [r3, #-1]!  @ repeat 3 more times
+  strb.w  r5, [r4, #-1]!
+  ldrb.w  r5, [r3, #-1]!
+  strb.w  r5, [r4, #-1]!
+  ldrb.w  r5, [r3, #-1]!
+  strb.w  r5, [r4, #-1]!
+  bhs.n   quad_b_copy     @ if so, quad copy again
   
   cmp   r3, r1          @ check if we are at the final source address
   beq     exit          @ if so, exit
@@ -99,41 +101,40 @@ copy_f:                 @ copy from beginning of source and work forwards
   tst   r1, #3          @ check if the source address is 4-byte aligned
   bne   quad_f_copy     @ if not, copy 4 bytes at a time
 
+.balign 8               @ align the loop to an 8 byte boundary, also force encodings for speed/alignment
 @ if there are 16 or more bytes to copy and the src and dest are 4-byte aligned, can copy word-wise
 quad_word_f_copy:
-  sub   r2, r2, #16     @ decrement remaining bytes by 4
-  ldr   r5, [r1]        @ load word from memory[r1] into r5
-  str   r5, [r4]        @ store r5 word into memory[r4]
-  ldr   r5, [r1, #4]    @ load word from memory[r1+4] into r5
-  str   r5, [r4, #4]    @ store r5 word into memory[r4+4]
-  ldr   r5, [r1, #8]
-  str   r5, [r4, #8]
-  ldr   r5, [r1, #12]
-  str   r5, [r4, #12]
-  cmp   r2, #16          @ check if there are 16 or more bytes to copy
-  add   r4, r4, #16
-  add   r1, r1, #16
-  bhs   quad_word_f_copy     @ if so, quad copy again
-  cmp   r2, #4          @ if there are 4 or more bytes to copy
+  sub.w   r2, r2, #16     @ decrement remaining bytes by 16
+  cmp.w   r2, #16         @ check if there are 16 or more bytes to copy
+  ldr.w  r5, [r1], #4     @ load byte from memory[r1] into r5. r1 is incremented by 4
+  str.w  r5, [r4], #4     @ store r5 byte into memory[r4]. r4 is incremented by 4
+  ldr.w  r5, [r1], #4     @ repeat 3 more times
+  str.w  r5, [r4], #4
+  ldr.w  r5, [r1], #4
+  str.w  r5, [r4], #4
+  ldr.w  r5, [r1], #4
+  str.w  r5, [r4], #4
+  bhs.n   quad_word_f_copy  @ if there are 16+ bytes left, quad word copy again
+  cmp   r2, #4              @ if there are 4 or more bytes to copy
   bhs   quad_f_copy
-  cmp   r3, r1          @ check if we are at the final source address
-  bne   copy_fwd_single @ if not, finish with single byte copying
-  b     exit            @ otherwise, exit
+  cmp   r3, r1            @ check if we are at the final source address
+  bne   copy_fwd_single   @ if not, finish with single byte copying
+  b     exit              @ otherwise, exit
 
+.balign 4                 @ align the loop to a 4 byte boundary, also force encodings for speed/alignment
+                          @ I'm not sure why, but quad_f_copy was the only loop that didn't benefit from 8 byte alignment
 quad_f_copy:
-  sub   r2, r2, #4      @ decrement remaining bytes by 4
-  ldrb  r5, [r1]        @ load byte from memory[r1] into r5
-  strb  r5, [r4]        @ store r5 byte into memory[r4]
-  ldrb  r5, [r1, #1]    @ load byte from memory[r1+1] into r5
-  strb  r5, [r4, #1]    @ store r5 byte into memory[r4+1]
-  ldrb  r5, [r1, #2]
-  strb  r5, [r4, #2]
-  ldrb  r5, [r1, #3]
-  strb  r5, [r4, #3]
-  cmp   r2, #4          @ check if there are 4 or more bytes to copy
-  add   r4, r4, #4
-  add   r1, r1, #4
-  bhs   quad_f_copy     @ if so, quad copy again
+  sub.w   r2, r2, #4      @ decrement remaining bytes by 4
+  cmp.w   r2, #4          @ check if there are 4 or more bytes to copy
+  ldrb.w  r5, [r1], #1    @ load byte from memory[r1] into r5. r1 is incremented by 1
+  strb.w  r5, [r4], #1    @ store r5 byte into memory[r4]. r4 is incremented by 1
+  ldrb.w  r5, [r1], #1    @ repeat 3 more times
+  strb.w  r5, [r4], #1
+  ldrb.w  r5, [r1], #1
+  strb.w  r5, [r4], #1
+  ldrb.w  r5, [r1], #1
+  strb.w  r5, [r4], #1
+  bhs.n   quad_f_copy     @ if so, quad copy again
 
   cmp   r3, r1          @ check if we are at the final source address
   beq   exit            @ if so, exit
