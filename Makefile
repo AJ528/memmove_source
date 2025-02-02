@@ -134,6 +134,7 @@ LDFLAGS += -Wl,-z,max-page-size=0x800
 LDFLAGS += -Xlinker -Map=$(OBJ_DIR)/$(TARGET_NAME).map
 # link in libgcc to handle some low level arithmetic operations
 LDFLAGS += -lgcc
+LDFLAGS += -lc
 LDFLAGS += -lrdimon
 
 
