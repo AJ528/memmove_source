@@ -72,9 +72,6 @@ TEST memmove_test(uint32_t data_len, uint32_t src_offset, uint32_t dest_offset, 
     printfln_("%-6u %-#10x %-#10x %-8u %-6u %-8u %-6u", data_len, src_offset, dest_offset, orig_cycle, orig_LSU, new_cycle, new_LSU);
   }
 
-  // memmove(&(expected[dest_offset]), &(expected[src_offset]), data_len);
-  // memmove_new(&(actual[dest_offset]), &(actual[src_offset]), data_len);
-
   ASSERT_MEM_EQ(expected, actual, BUFFER_SIZE);
 
   PASS();
@@ -122,10 +119,6 @@ TEST memmove_slide_dest(uint32_t data_len, uint32_t src_offset)
   CHECK_CALL(memmove_test(data_len, src_offset, src_offset, true));
   CHECK_CALL(memmove_test(data_len, src_offset, src_offset + 1, true));
   CHECK_CALL(memmove_test(data_len, src_offset, src_offset + 4, true));
-
-  // for(dest_offset = src_offset - 4; dest_offset <= src_offset + 4; dest_offset++){
-  //   CHECK_CALL(memmove_test(data_len, src_offset, dest_offset, true));
-  // }
 
   CHECK_CALL(memmove_test(data_len, src_offset, src_offset+data_len, true));
   CHECK_CALL(memmove_test(data_len, src_offset, BUFFER_SIZE-data_len, true));
