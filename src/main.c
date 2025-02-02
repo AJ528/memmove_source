@@ -23,7 +23,7 @@ static void sysclk_init(void);
 #define BUFFER_SIZE 0x1000
 
 extern void* memmove_orig(void *destination, const void *source, size_t num);
-extern void* memmove_new(void *destination, const void *source, size_t num);
+extern void* memmove_(void *destination, const void *source, size_t num);
 
 static inline void enable_cycle_count(void);
 static inline uint32_t get_cycle_count(void);
@@ -58,7 +58,7 @@ TEST memmove_test(uint32_t data_len, uint32_t src_offset, uint32_t dest_offset, 
 
   uint32_t memmove_new_LSU_start = get_LSU_count();
   uint32_t memmove_new_start = get_cycle_count();
-  memmove_new(&(actual[dest_offset]), &(actual[src_offset]), data_len);
+  memmove_(&(actual[dest_offset]), &(actual[src_offset]), data_len);
   uint32_t memmove_new_stop = get_cycle_count();
     uint32_t memmove_new_LSU_stop = get_LSU_count();
 
@@ -84,15 +84,8 @@ TEST memmove_iterate(uint32_t data_len_limit)
   uint32_t dest_offset;
   uint32_t offset_limit;
 
-  bool print_performance = false;
-
   for(data_len = 0; data_len < data_len_limit; data_len++){
-    offset_limit = (data_len * 2)+5;
-    if(data_len == data_len_limit - 1){
-      print_performance = true;
-    }else{
-      print_performance = false;
-    }
+    offset_limit = data_len + 8;
     for(src_offset = 0; src_offset < offset_limit; src_offset++){
       for(dest_offset = 0; dest_offset < offset_limit; dest_offset++){
         CHECK_CALL(memmove_test(data_len, src_offset, dest_offset, false));
