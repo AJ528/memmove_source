@@ -1,5 +1,5 @@
 # mmemmove
-`memmove()` written in ARM Cortex-M Assembly.
+`memmove()` written in ARM Cortex-M Assembly. Designed for Cortex M4 and M0+ cores. Probably works on other cores.
 
 ### Status 
 Does everything I need it to. Will fix bugs as I come across them.
@@ -23,6 +23,7 @@ Compiles down to under 350 bytes on `arm-none-eabi-gcc`. memmove is about 120 li
 
 In my testing, `memmove_()` is always faster than my standard `memmove()`. Sometimes it's only a few cycles faster, other times it is more than 7x faster.
 
-There are optimizations to quickly copy 4-byte words if they are aligned.
+This repo is designed to run on an STM32WLxx microcontroller with semihosting. It uses the cycle counter of the Cortex-M4 microcontroller to profile the functions during testing.
+Note: the environment this repo was developed in is only important to know if you want to test the `memmove_()` function like I did. If you just want to use it, follow the instructions in [How to use this in an embedded project](#how-to-use-this-in-an-embedded-project).
 
 I also included testing using Greatest from https://github.com/silentbicycle/greatest. There's a number of tests that compare `memmove_()` against the standard `memmove()`.
