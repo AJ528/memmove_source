@@ -20,20 +20,13 @@ static void UART_init(void);
 static void sysclk_init(void);
 
 
-#define BUFFER_SIZE 0x200
-#define ENTRY_LEN 100
-#define SRC_OFFSET 0x40
-#define DEST_OFFSET 0x41
-
+#define BUFFER_SIZE 0x400
 
 extern void* memmove_new(void *destination, const void *source, size_t num);
 
-static void test(void* (*f)(void *, const void *, size_t), char * func_name);
 static inline void enable_cycle_count(void);
 static inline uint32_t get_cycle_count(void);
 static inline uint32_t get_LSU_count(void);
-static void clear_buffer(uint8_t *buf, uint32_t size);
-static void set_buffer(uint8_t *buf);
 
 extern void initialise_monitor_handles(void);
 
@@ -44,7 +37,7 @@ TEST memmove_test(uint32_t data_len, uint32_t src_offset, uint32_t dest_offset, 
   uint8_t expected[BUFFER_SIZE] = {0};
   uint8_t actual[BUFFER_SIZE] = {0};
 
-  if(((data_len + src_offset) >= BUFFER_SIZE) || ((data_len + dest_offset) >= BUFFER_SIZE)){
+  if(((data_len + src_offset) > BUFFER_SIZE) || ((data_len + dest_offset) > BUFFER_SIZE)){
     FAIL();
   }
 
@@ -56,20 +49,26 @@ TEST memmove_test(uint32_t data_len, uint32_t src_offset, uint32_t dest_offset, 
     actual[src_offset + i] = i;
   }
 
+  uint32_t memmove_orig_LSU_start = get_LSU_count();
   uint32_t memmove_orig_start = get_cycle_count();
   memmove(&(expected[dest_offset]), &(expected[src_offset]), data_len);
   uint32_t memmove_orig_stop = get_cycle_count();
+  uint32_t memmove_orig_LSU_stop = get_LSU_count();
 
+  uint32_t memmove_new_LSU_start = get_LSU_count();
   uint32_t memmove_new_start = get_cycle_count();
   memmove_new(&(actual[dest_offset]), &(actual[src_offset]), data_len);
   uint32_t memmove_new_stop = get_cycle_count();
+    uint32_t memmove_new_LSU_stop = get_LSU_count();
 
 
 
   if(print_performance){
     uint32_t orig_cycle = memmove_orig_stop-memmove_orig_start;
     uint32_t new_cycle = memmove_new_stop-memmove_new_start;
-    printfln_("%-10u %-10u %-10u %-12u %-12u", data_len, src_offset, dest_offset, orig_cycle, new_cycle);
+    uint8_t orig_LSU = memmove_orig_LSU_stop-memmove_orig_LSU_start;
+    uint8_t new_LSU = memmove_new_LSU_stop-memmove_new_LSU_start;
+    printfln_("%-6u %-#10x %-#10x %-8u %-6u %-8u %-6u", data_len, src_offset, dest_offset, orig_cycle, orig_LSU, new_cycle, new_LSU);
   }
 
   // memmove(&(expected[dest_offset]), &(expected[src_offset]), data_len);
@@ -106,6 +105,33 @@ TEST memmove_iterate(uint32_t data_len_limit)
   PASS();
 }
 
+TEST memmove_slide_dest(uint32_t data_len, uint32_t src_offset)
+{
+  uint32_t dest_offset;
+
+  if((src_offset < data_len) || (src_offset + (2 * data_len)) > BUFFER_SIZE){
+    FAIL();
+  }
+
+  CHECK_CALL(memmove_test(data_len, src_offset, 0, true));
+  CHECK_CALL(memmove_test(data_len, src_offset, src_offset-data_len, true));
+
+  CHECK_CALL(memmove_test(data_len, src_offset, src_offset - 4, true));
+  CHECK_CALL(memmove_test(data_len, src_offset, src_offset - 1, true));
+  CHECK_CALL(memmove_test(data_len, src_offset, src_offset, true));
+  CHECK_CALL(memmove_test(data_len, src_offset, src_offset + 1, true));
+  CHECK_CALL(memmove_test(data_len, src_offset, src_offset + 4, true));
+
+  // for(dest_offset = src_offset - 4; dest_offset <= src_offset + 4; dest_offset++){
+  //   CHECK_CALL(memmove_test(data_len, src_offset, dest_offset, true));
+  // }
+
+  CHECK_CALL(memmove_test(data_len, src_offset, src_offset+data_len, true));
+  CHECK_CALL(memmove_test(data_len, src_offset, BUFFER_SIZE-data_len, true));
+
+  PASS();
+}
+
 // Add definitions that need to be in the test runner's main file.
 GREATEST_MAIN_DEFS();
 
@@ -116,38 +142,20 @@ int main(void)
   UART_init();
   enable_cycle_count();
 
-  printfln_("%-10s %-10s %-10s %-12s %-12s", "data_len", "src_off", "dest_off", "orig_cycle", "new_cycle");
-
-
-  // test(memmove_new, "memmove_new");
-  // test(memmove, "lib_memmove");
-  // print_newline();
+  printfln_("%-6s %-10s %-10s %-8s %-6s %-8s %-6s", "d_len", "src_off", "dest_off", "o_cycle", "o_LSU", "n_cycle", "n_LSU");
 
   GREATEST_MAIN_BEGIN();  // command-line options, initialization.
   
   RUN_TESTp(memmove_test, 42, 5, 70, true);
 
-  RUN_TESTp(memmove_test, 0x100, 0x20, 0x1C, true);
+  RUN_TESTp(memmove_test, 10, 0x81, 0x7E, true);
+  RUN_TESTp(memmove_test, 20, 0x81, 0x7E, true);
+  RUN_TESTp(memmove_test, 100, 0x81, 0x7E, true);
 
-  RUN_TESTp(memmove_test, 0x100, 0x20, 0x1C, true);
-  RUN_TESTp(memmove_test, 0x100, 0x20, 0x1D, true);
-  RUN_TESTp(memmove_test, 0x100, 0x20, 0x1E, true);
-  RUN_TESTp(memmove_test, 0x100, 0x20, 0x1F, true);
-  RUN_TESTp(memmove_test, 0x100, 0x20, 0x20, true);
-  RUN_TESTp(memmove_test, 0x100, 0x20, 0x21, true);
-  RUN_TESTp(memmove_test, 0x100, 0x20, 0x22, true);
-  RUN_TESTp(memmove_test, 0x100, 0x20, 0x23, true);
-  RUN_TESTp(memmove_test, 0x100, 0x20, 0x24, true);
 
-  RUN_TESTp(memmove_test, 0x100, 0x21, 0x1D, true);
-  RUN_TESTp(memmove_test, 0x100, 0x21, 0x1E, true);
-  RUN_TESTp(memmove_test, 0x100, 0x21, 0x1F, true);
-  RUN_TESTp(memmove_test, 0x100, 0x21, 0x20, true);
-  RUN_TESTp(memmove_test, 0x100, 0x21, 0x21, true);
-  RUN_TESTp(memmove_test, 0x100, 0x21, 0x22, true);
-  RUN_TESTp(memmove_test, 0x100, 0x21, 0x23, true);
-  RUN_TESTp(memmove_test, 0x100, 0x21, 0x24, true);
-  RUN_TESTp(memmove_test, 0x100, 0x21, 0x25, true);
+  RUN_TESTp(memmove_slide_dest, 0x0f, 0x80);
+  RUN_TESTp(memmove_slide_dest, 0x0f, 0x81);
+  RUN_TESTp(memmove_slide_dest, 0x22, 0x17f);
 
   RUN_TEST1(memmove_iterate, 24);
 
@@ -156,30 +164,6 @@ int main(void)
   while (1)
   {
   	// LL_mDelay(1000);
-  }
-}
-
-
-static void test(void* (*f)(void *, const void *, size_t), char * func_name)
-{
-  uint8_t buffer[BUFFER_SIZE] = {0};
-  set_buffer(buffer);
-
-  uint32_t LSU_start = get_LSU_count();
-  uint32_t start = get_cycle_count();
-
-  f(&buffer[DEST_OFFSET], &buffer[SRC_OFFSET], ENTRY_LEN);
-
-  uint32_t stop = get_cycle_count();
-  uint32_t LSU_stop = get_LSU_count();
-
-  printfln_("%s took %u cycles and %u LSU cycles", func_name, stop-start, (uint8_t)(LSU_stop-LSU_start));
-}
-
-static void set_buffer(uint8_t *buf)
-{
-  for(int i=0; i < ENTRY_LEN; i++){
-    buf[SRC_OFFSET + i] = i;
   }
 }
 
