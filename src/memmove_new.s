@@ -61,31 +61,56 @@ copy_bck_single:
 
 @ copy forwards
 copy_f:                 @ copy from beginning of source and work forwards
-  subs  r4, r0, #1      @ subtract 1 from the first destination address and store in r4
   cmp   r2, #4          @ check if there are 4 or more bytes to copy
+  mov   r4, r0          @ copy destination addr into r4
   blo   copy_fwd_single @ if not, copy one at a time
+  tst   r4, #3          @ check if the destination address is 4-byte aligned
+  bne   quad_f_copy     @ if not, copy 4 bytes at a time
+  tst   r1, #3          @ check if the source address is 4-byte aligned
+  bne   quad_f_copy     @ if not, copy 4 bytes at a time
+
+@ if there are 4 or more bytes to copy and the src and dest are 4-byte aligned, can copy word-wise
+word_f_copy:
+  sub   r2, r2, #4      @ decrement remaining bytes by 4
+  ldr   r5, [r1], #4    @ load word from memory[r1] into r5. r1 is updated to r1+4
+  str   r5, [r4], #4    @ store r5 word into memory[r4]. r4 is updated to r4+4
+  cmp   r2, #4          @ check if there are 4 or more bytes to copy
+  bhs   word_f_copy     @ if so, quad copy again
+  cmp   r3, r1          @ check if we are at the final source address
+  bne   copy_fwd_single @ if not, finish with single byte copying
+  b     exit            @ otherwise, exit
 
 quad_f_copy:
   sub   r2, r2, #4      @ decrement remaining bytes by 4
-  ldrb  r5, [r1], #1    @ load byte from memory[r1] into r5. r1 is updated to r1+1
-  strb  r5, [r4, #1]!   @ store r5 byte into memory[r4+1]. r4 is updated to r4+1
-  ldrb  r5, [r1], #1    @ repeat for the next 3 bytes
-  strb  r5, [r4, #1]!
-  ldrb  r5, [r1], #1
-  strb  r5, [r4, #1]!
-  ldrb  r5, [r1], #1
-  strb  r5, [r4, #1]!
+  @ ldrb  r5, [r1], #1    @ load byte from memory[r1] into r5. r1 is updated to r1+1
+  @ strb  r5, [r4], #1    @ store r5 byte into memory[r4]. r4 is updated to r4+1
+  @ ldrb  r5, [r1], #1    @ repeat for the next 3 bytes
+  @ strb  r5, [r4], #1
+  @ ldrb  r5, [r1], #1
+  @ strb  r5, [r4], #1
+  @ ldrb  r5, [r1], #1
+  @ strb  r5, [r4], #1
+  ldrb  r5, [r1]
+  strb  r5, [r4]
+  ldrb  r5, [r1, #1]    @ load byte from memory[r1] into r5. r1 is updated to r1+1
+  strb  r5, [r4, #1]    @ store r5 byte into memory[r4]. r4 is updated to r4+1
+  ldrb  r5, [r1, #2]    @ repeat for the next 3 bytes
+  strb  r5, [r4, #2]
+  ldrb  r5, [r1, #3]
+  strb  r5, [r4, #3]
   cmp   r2, #4          @ check if there are 4 or more bytes to copy
+  add   r4, r4, #4
+  add   r1, r1, #4
   bhs   quad_f_copy     @ if so, quad copy again
 
   cmp   r3, r1          @ check if we are at the final source address
-  beq     exit          @ if so, exit
+  beq   exit            @ if so, exit
 @ otherwise, there are <4 bytes left to copy forward
 
 copy_fwd_single:
   ldrb  r5, [r1], #1    @ load byte from memory[r1] into r5. r1 is updated to r1+1
   cmp   r3, r1          @ check if we are at the final source address
-  strb  r5, [r4, #1]!   @ store r5 byte into memory[r4+1]. r4 is updated to r4+1
+  strb  r5, [r4], #1    @ store r5 byte into memory[r4]. r4 is updated to r4+1
   bne   copy_fwd_single @ if not done, repeat
 
 exit:
