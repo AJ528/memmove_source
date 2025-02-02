@@ -20,8 +20,9 @@ static void UART_init(void);
 static void sysclk_init(void);
 
 
-#define BUFFER_SIZE 0x400
+#define BUFFER_SIZE 0x1000
 
+extern void* memmove_orig(void *destination, const void *source, size_t num);
 extern void* memmove_new(void *destination, const void *source, size_t num);
 
 static inline void enable_cycle_count(void);
@@ -145,17 +146,26 @@ int main(void)
   printfln_("%-6s %-10s %-10s %-8s %-6s %-8s %-6s", "d_len", "src_off", "dest_off", "o_cycle", "o_LSU", "n_cycle", "n_LSU");
 
   GREATEST_MAIN_BEGIN();  // command-line options, initialization.
-  
-  RUN_TESTp(memmove_test, 42, 5, 70, true);
 
+  RUN_TESTp(memmove_test, 1, 0x81, 0x7E, true);
   RUN_TESTp(memmove_test, 10, 0x81, 0x7E, true);
   RUN_TESTp(memmove_test, 20, 0x81, 0x7E, true);
-  RUN_TESTp(memmove_test, 100, 0x81, 0x7E, true);
+  RUN_TESTp(memmove_test, 50, 0x81, 0x7E, true);
 
+  RUN_TESTp(memmove_test, 1, 0x81, 0x82, true);
+  RUN_TESTp(memmove_test, 10, 0x81, 0x82, true);
+  RUN_TESTp(memmove_test, 20, 0x81, 0x82, true);
+  RUN_TESTp(memmove_test, 50, 0x81, 0x82, true);
 
-  RUN_TESTp(memmove_slide_dest, 0x0f, 0x80);
+  RUN_TESTp(memmove_test, 1, 0x81, 0x102, true);
+  RUN_TESTp(memmove_test, 10, 0x81, 0x102, true);
+  RUN_TESTp(memmove_test, 20, 0x81, 0x102, true);
+  RUN_TESTp(memmove_test, 50, 0x81, 0x102, true);
+
   RUN_TESTp(memmove_slide_dest, 0x0f, 0x81);
+  RUN_TESTp(memmove_slide_dest, 0x10, 0x80);
   RUN_TESTp(memmove_slide_dest, 0x22, 0x17f);
+  RUN_TESTp(memmove_slide_dest, 0x200, 0x400);
 
   RUN_TEST1(memmove_iterate, 24);
 
