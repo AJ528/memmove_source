@@ -12,6 +12,7 @@
 #include <stdint.h>
 #include <string.h>
 #include <stddef.h>
+#include <stdio.h>
 
 static void UART_init(void);
 static void sysclk_init(void);
@@ -34,11 +35,63 @@ static inline uint32_t get_LSU_count(void);
 static void clear_buffer(uint8_t *buf, uint32_t size);
 static void set_buffer(uint8_t *buf);
 
+extern void initialise_monitor_handles(void);
+
+
+TEST memmove_test(uint32_t data_len, uint32_t src_offset, uint32_t dest_offset)
+{
+    uint8_t expected[BUFFER_SIZE] = {0};
+    uint8_t actual[BUFFER_SIZE] = {0};
+
+    if(((data_len + src_offset) >= BUFFER_SIZE) || ((data_len + dest_offset) >= BUFFER_SIZE)){
+      FAIL();
+    }
+
+
+    uint32_t i;
+
+    for(i = 0; i < data_len; i++){
+      expected[src_offset + i] = i;
+      actual[src_offset + i] = i;
+    }
+
+    memmove(&(expected[dest_offset]), &(expected[src_offset]), data_len);
+    memmove_new(&(actual[dest_offset]), &(actual[src_offset]), data_len);
+
+    // force fail
+    // actual[dest_offset+16] = 0;
+
+    ASSERT_MEM_EQ(expected, actual, BUFFER_SIZE);
+
+    PASS();
+}
+
+TEST memmove_iterate(uint32_t data_len_limit)
+{
+  uint32_t data_len;
+  uint32_t src_offset;
+  uint32_t dest_offset;
+  uint32_t offset_limit;
+
+  for(data_len = 0; data_len < data_len_limit; data_len++){
+    offset_limit = (data_len * 2)+5;
+    for(src_offset = 0; src_offset < offset_limit; src_offset++){
+      for(dest_offset = 0; dest_offset < offset_limit; dest_offset++){
+        CHECK_CALL(memmove_test(data_len, src_offset, dest_offset));
+      }
+    }
+  }
+
+  PASS();
+}
+
 // Add definitions that need to be in the test runner's main file.
 GREATEST_MAIN_DEFS();
 
 int main(void)
 {
+  initialise_monitor_handles();
+
   sysclk_init();
   UART_init();
 
@@ -50,6 +103,9 @@ int main(void)
   print_newline();
 
   GREATEST_MAIN_BEGIN();  // command-line options, initialization.
+  
+  RUN_TESTp(memmove_test, 42, 5, 70);
+  RUN_TEST1(memmove_iterate, 32);
 
   GREATEST_MAIN_END();    // display results
 
