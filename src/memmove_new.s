@@ -17,7 +17,7 @@ memmove_new:
 @ r2 = num bytes
 @ returns destination addr in r0
   cmp   r2, #0            @ if there are 0 bytes to move
-  push  {r4, r5, r6, r7}  @ store r4-r7 values on stack
+  push  {r4, r5}          @ store r4 & r5 values on stack
   beq   exit              @ exit
 
   add   r3, r1, r2      @ calculate final source address + 1 and store in r3
@@ -146,8 +146,8 @@ copy_fwd_single:
   bne   copy_fwd_single @ if not done, repeat
 
 exit:
-  pop   {r4, r5, r6, r7}  @ restore previous value of r4-r7
-  bx    lr                @ exit function
+  pop   {r4, r5}        @ restore previous value of r4 & r5
+  bx    lr              @ exit function
 
   .size memmove_new, . - memmove_new 
 
