@@ -1,5 +1,5 @@
 # mmemmove
-`memmove()` written in ARM Cortex-M Assembly. Designed for Cortex M4 and M0+ cores. Probably works on other cores.
+`memmove()` written in ARM Cortex-M Assembly. Designed for ARMv7-M architecture (Cortex M3, M4, and M7).
 
 ### Status 
 Does everything I need it to. Will fix bugs as I come across them.
