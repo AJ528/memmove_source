@@ -47,11 +47,11 @@ TEST foo_should_foo(void) {
 }
 
 static void setup_cb(void *data) {
-    printf("setup callback for each test case\n");
+    printf_("setup callback for each test case\n");
 }
 
 static void teardown_cb(void *data) {
-    printf("teardown callback for each test case\n");
+    printf_("teardown callback for each test case\n");
 }
 
 SUITE(suite) {
@@ -94,9 +94,12 @@ int main(int argc, char **argv) {
 
 
 #include <stdlib.h>
-#include <stdio.h>
+#include "mprintf.h"
 #include <string.h>
 #include <ctype.h>
+
+#define EXIT_SUCCESS    (0)
+#define EXIT_FAILURE    (-1)
 
 /***********
  * Options *
@@ -109,7 +112,7 @@ int main(int argc, char **argv) {
 
 /* FILE *, for test logging. */
 #ifndef GREATEST_STDOUT
-#define GREATEST_STDOUT stdout
+#define GREATEST_STDOUT 0
 #endif
 
 /* Remove GREATEST_ prefix from most commonly used symbols? */
@@ -125,7 +128,7 @@ int main(int argc, char **argv) {
 /* Make it possible to replace fprintf with another
  * function with the same interface. */
 #ifndef GREATEST_FPRINTF
-#define GREATEST_FPRINTF fprintf
+#define GREATEST_FPRINTF fprintf_
 #endif
 
 #if GREATEST_USE_LONGJMP
@@ -134,7 +137,7 @@ int main(int argc, char **argv) {
 
 /* Set to 0 to disable all use of time.h / clock(). */
 #ifndef GREATEST_USE_TIME
-#define GREATEST_USE_TIME 1
+#define GREATEST_USE_TIME 0
 #endif
 
 #if GREATEST_USE_TIME
@@ -758,7 +761,7 @@ int greatest_test_pre(const char *name) {                               \
             }                                                           \
         }                                                               \
         if (g->running_test) {                                          \
-            fprintf(stderr, "Error: Test run inside another test.\n");  \
+            fprintf_(0, "Error: Test run inside another test.\n");  \
             return 0;                                                   \
         }                                                               \
         GREATEST_SET_TIME(g->suite.pre_test);                           \
@@ -1116,7 +1119,7 @@ int greatest_prng_init_second_pass(int id, unsigned long seed) {        \
     p->a = (p->a ? p->a : 4) | 1;            /* multiplied by 4 */      \
     p->c = 2147483647;        /* and so p->c ((2 ** 31) - 1) is */      \
     p->initialized = 1;     /* always relatively prime to p->a. */      \
-    fprintf(stderr, "init_second_pass: a %lu, c %lu, state %lu\n",      \
+    fprintf_(0, "init_second_pass: a %lu, c %lu, state %lu\n",      \
         p->a, p->c, p->state);                                          \
     return 1;                                                           \
 }                                                                       \

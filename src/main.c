@@ -29,8 +29,6 @@ static inline void enable_cycle_count(void);
 static inline uint32_t get_cycle_count(void);
 static inline uint32_t get_LSU_count(void);
 
-extern void initialise_monitor_handles(void);
-
 
 TEST memmove_test(uint32_t data_len, uint32_t src_offset, uint32_t dest_offset, bool print_performance)
 {
@@ -124,7 +122,6 @@ GREATEST_MAIN_DEFS();
 
 int main(void)
 {
-  initialise_monitor_handles();
   sysclk_init();
   UART_init();
   enable_cycle_count();

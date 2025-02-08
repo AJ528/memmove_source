@@ -11,6 +11,7 @@ int32_t puts_(const char * restrict str);
 int32_t println_(const char * restrict str);
 int32_t printfln_(const char * restrict format_str, ...);
 int32_t printf_(const char * restrict format_str, ...);
+int32_t fprintf_(void* unused, const char * restrict format_str, ...);
 int32_t sprintf_(char * restrict out_str, const char * restrict format_str, ...);
 int32_t snprintf_(char * restrict out_str, uint32_t buf_len, const char * restrict format_str, ...);
 int32_t vsnprintf_(char * restrict out_str, uint32_t buf_len, const char * restrict format_str, va_list arg);

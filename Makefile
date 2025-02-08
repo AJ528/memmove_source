@@ -93,7 +93,8 @@ COMMON_FLAGS += $(FLOAT_FLAGS)
 # define flags
 COMMON_FLAGS += $(DEFINE_FLAGS)
 # use support semihosting
-COMMON_FLAGS += --specs=rdimon.specs
+# COMMON_FLAGS += --specs=rdimon.specs
+COMMON_FLAGS += --specs=nano.specs
 # COMMON_FLAGS += -nostdlib
 # use no builtin functions 
 # this prevent gcc from optimizing printf() if you decide to roll your own
@@ -134,8 +135,6 @@ LDFLAGS += -Wl,-z,max-page-size=0x800
 LDFLAGS += -Xlinker -Map=$(OBJ_DIR)/$(TARGET_NAME).map
 # link in libgcc to handle some low level arithmetic operations
 LDFLAGS += -lgcc
-LDFLAGS += -lc
-LDFLAGS += -lrdimon
 
 
 # creates the list of .c source files by looking for every .c file in the source directories

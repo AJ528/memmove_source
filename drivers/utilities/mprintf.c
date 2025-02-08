@@ -115,6 +115,33 @@ int32_t printfln_(const char * restrict format_str, ...)
     return(print_len);
 }
 
+int32_t fprintf_(void* unused, const char * restrict format_str, ...)
+{
+    char output_buffer[PRINTF_BUFFER_SIZE];
+    va_list arg;
+    int32_t ret;
+    int32_t print_len;
+
+    // start reading the list of variable length arguments
+    va_start(arg, format_str);
+
+    ret = vsnprintf_(output_buffer, PRINTF_BUFFER_SIZE, format_str, arg);
+
+    va_end(arg);
+
+    if(ret > (PRINTF_BUFFER_SIZE - 1)){
+        print_len = (PRINTF_BUFFER_SIZE - 1);
+    }else{
+        print_len = ret;
+    }
+
+    for(int32_t i = 0; i < print_len; i++){
+        putchar_(output_buffer[i]);
+    }
+
+    return(print_len);
+}
+
 // prints a formatted string to the output
 // returns the number of characters successfully printed
 int32_t printf_(const char * restrict format_str, ...)
