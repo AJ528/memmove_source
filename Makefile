@@ -92,10 +92,9 @@ COMMON_FLAGS += -mthumb
 COMMON_FLAGS += $(FLOAT_FLAGS)
 # define flags
 COMMON_FLAGS += $(DEFINE_FLAGS)
-# use support semihosting
-# COMMON_FLAGS += --specs=rdimon.specs
+# use nano lib
 COMMON_FLAGS += --specs=nano.specs
-# COMMON_FLAGS += -nostdlib
+
 # use no builtin functions 
 # this prevent gcc from optimizing printf() if you decide to roll your own
 COMMON_FLAGS += -fno-builtin
