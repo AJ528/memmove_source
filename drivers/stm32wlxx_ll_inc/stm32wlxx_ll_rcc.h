@@ -31,6 +31,11 @@ extern "C" {
   * @{
   */
 
+extern uint32_t SystemCoreClock;            /*!< System Clock Frequency */
+extern const uint32_t AHBPrescTable[16];    /*!< AHB prescalers table values */
+extern const uint32_t APBPrescTable[8];     /*!< APB prescalers table values */
+extern const uint32_t MSIRangeTable[16];    /*!< MSI ranges table values     */
+
 #if defined(RCC)
 
 /** @defgroup RCC_LL RCC
@@ -3392,6 +3397,8 @@ __STATIC_INLINE uint32_t LL_RCC_IsEnabledIT_LSECSS(void)
 /**
   * @}
   */
+
+void SystemCoreClockUpdate(void);
 
 #if defined(USE_FULL_LL_DRIVER)
 /** @defgroup RCC_LL_EF_Init De-initialization function

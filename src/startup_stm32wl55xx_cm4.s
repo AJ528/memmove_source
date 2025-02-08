@@ -58,8 +58,11 @@ Reset_Handler:
   ldr   r0, =_estack
   mov   sp, r0          /* set stack pointer */
 
-/* Call the clock system initialization function.*/
-  bl  SystemInit
+/* If needed, here is a good place to change the vector table location */
+/* This can be done via the SCB->VTOR register. */
+
+/* If needed, here is a good place to enable the floating point unit (FPU) */
+/* This can be done via the SCB->CPACR register. */
 
 /* Copy the data segment initializers from flash to SRAM */
   ldr r0, =_sdata

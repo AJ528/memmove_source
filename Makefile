@@ -3,7 +3,7 @@
 
 # set debug to 0 or 1
 # adjust optimization flag accordingly below
-debug = 0
+debug = 1
 
 # set fpu to soft, softfp or hard
 # soft is also for when you aren't using the FPU

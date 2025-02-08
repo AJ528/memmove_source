@@ -211,7 +211,6 @@ typedef enum
 
 #endif
 
-#include "system_stm32wlxx.h"
 #include <stdint.h>
 
 /**
