@@ -98,9 +98,6 @@ int main(int argc, char **argv) {
 #include <string.h>
 #include <ctype.h>
 
-#define EXIT_SUCCESS    (0)
-#define EXIT_FAILURE    (-1)
-
 /***********
  * Options *
  ***********/
