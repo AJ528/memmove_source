@@ -25,6 +25,7 @@ static void sysclk_init(void);
 extern void* memmove_orig(void *destination, const void *source, size_t num);
 extern void* memmove_(void *destination, const void *source, size_t num);
 
+
 static inline void enable_cycle_count(void);
 static inline uint32_t get_cycle_count(void);
 static inline uint32_t get_LSU_count(void);
@@ -47,27 +48,21 @@ TEST memmove_test(uint32_t data_len, uint32_t src_offset, uint32_t dest_offset, 
     expected[src_offset + i] = i;
     actual[src_offset + i] = i;
   }
-
-  uint32_t memmove_orig_LSU_start = get_LSU_count();
   uint32_t memmove_orig_start = get_cycle_count();
   memmove(&(expected[dest_offset]), &(expected[src_offset]), data_len);
   uint32_t memmove_orig_stop = get_cycle_count();
-  uint32_t memmove_orig_LSU_stop = get_LSU_count();
 
-  uint32_t memmove_new_LSU_start = get_LSU_count();
   uint32_t memmove_new_start = get_cycle_count();
   memmove_(&(actual[dest_offset]), &(actual[src_offset]), data_len);
   uint32_t memmove_new_stop = get_cycle_count();
-    uint32_t memmove_new_LSU_stop = get_LSU_count();
 
 
 
   if(print_performance){
     uint32_t orig_cycle = memmove_orig_stop-memmove_orig_start;
     uint32_t new_cycle = memmove_new_stop-memmove_new_start;
-    uint8_t orig_LSU = memmove_orig_LSU_stop-memmove_orig_LSU_start;
-    uint8_t new_LSU = memmove_new_LSU_stop-memmove_new_LSU_start;
-    printfln_("%-6u %-#10x %-#10x %-8u %-6u %-8u %-6u", data_len, src_offset, dest_offset, orig_cycle, orig_LSU, new_cycle, new_LSU);
+    int32_t cycle_diff = orig_cycle - new_cycle;
+    printfln_("%-6u %-#10x %-#10x %-8u %-8u %-8d", data_len, src_offset, dest_offset, orig_cycle, new_cycle, cycle_diff);
   }
 
   ASSERT_MEM_EQ(expected, actual, BUFFER_SIZE);
@@ -126,7 +121,7 @@ int main(void)
   UART_init();
   enable_cycle_count();
 
-  printfln_("%-6s %-10s %-10s %-8s %-6s %-8s %-6s", "d_len", "src_off", "dest_off", "o_cycle", "o_LSU", "n_cycle", "n_LSU");
+  printfln_("%-6s %-10s %-10s %-8s %-8s %-8s", "d_len", "src_off", "dest_off", "o_cycle", "n_cycle", "c_diff");
 
   GREATEST_MAIN_BEGIN();  // command-line options, initialization.
 
