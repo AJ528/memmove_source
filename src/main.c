@@ -120,7 +120,8 @@ int main(void)
   sysclk_init();
   UART_init();
   enable_cycle_count();
-
+  
+  print_newline();
   printfln_("%-6s %-10s %-10s %-8s %-8s %-8s", "d_len", "src_off", "dest_off", "o_cycle", "n_cycle", "c_diff");
 
   GREATEST_MAIN_BEGIN();  // command-line options, initialization.

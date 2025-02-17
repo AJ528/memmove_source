@@ -65,7 +65,7 @@ quad_word_b_copy:
   b     exit                @ otherwise, exit
 
 
-.balign 4                   @ align the loop to a 4 byte boundary
+.balign 4                  @ align the loop to a 4 byte boundary
 quad_b_copy:                @ copy backwards 4 bytes at a time
   subs  r3, r3, #4          @ decrement r3 and r4 by 4
   subs  r4, r4, #4
@@ -129,7 +129,9 @@ quad_word_f_copy:
   b     exit                @ otherwise, exit
 
 
-.balign 8                   @ align the loop to a 4 byte boundary
+.balign 8                   @ align the loop to an 8 byte boundary
+  nop                       @ add 2 nops for alignment
+  nop
 quad_f_copy:                @ copy forwards 4 bytes at a time
   ldrb  r5, [r1]            @ load byte from memory[r1] into r5
   strb  r5, [r4]            @ store r5 byte into memory[r4]
