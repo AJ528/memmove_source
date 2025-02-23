@@ -780,7 +780,7 @@ static void greatest_do_pass(void) {                                    \
         GREATEST_FPRINTF(GREATEST_STDOUT, "PASS %s: %s",                \
             g->name_buf, g->msg ? g->msg : "");                         \
     } else {                                                            \
-      /*  GREATEST_FPRINTF(GREATEST_STDOUT, ".");   */                      \
+        /* GREATEST_FPRINTF(GREATEST_STDOUT, ".");  */                       \
     }                                                                   \
     g->suite.passed++;                                                  \
 }                                                                       \
@@ -1071,7 +1071,7 @@ static int greatest_memory_printf_cb(const void *t, void *udata) {      \
     greatest_memory_cmp_env *env = (greatest_memory_cmp_env *)udata;    \
     const unsigned char *buf = (const unsigned char *)t;                \
     unsigned char diff_mark = ' ';                                      \
-    FILE *out = GREATEST_STDOUT;                                        \
+    void *out = GREATEST_STDOUT;                                        \
     size_t i, line_i, line_len = 0;                                     \
     int len = 0;   /* format hexdump with differences highlighted */    \
     for (i = 0; i < env->size; i+= line_len) {                          \

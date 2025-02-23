@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-Copyright (c) 2020 STMicroelectronics.
+Copyright (c) 2024 STMicroelectronics.
 
  SPDX-License-Identifier: Apache-2.0
 
@@ -17,15 +17,15 @@ Copyright (c) 2020 STMicroelectronics.
  limitations under the License.
 -->
 <device xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" schemaVersion="1.1" xsi:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
-  <name>STM32WL5x_CM4</name>
-  <version>1.9</version>
-  <description>STM32WL5x_CM4</description>
+  <name>STM32WL5x_CM0P</name>
+  <version>2.1</version>
+  <description>STM32WL5x_CM0P</description>
   <cpu>
-    <name>CM4</name>
+    <name>CM0</name>
     <revision>r0p1</revision>
     <endian>little</endian>
     <mpuPresent>true</mpuPresent>
-    <fpuPresent>true</fpuPresent>
+    <fpuPresent>false</fpuPresent>
     <nvicPrioBits>4</nvicPrioBits>
     <vendorSystickConfig>false</vendorSystickConfig>
   </cpu>
@@ -46,14 +46,14 @@ Copyright (c) 2020 STMicroelectronics.
         <usage>registers</usage>
       </addressBlock>
       <interrupt>
-        <name>ADC</name>
-        <description>ADC global interrupt</description>
-        <value>18</value>
+        <name>ADC_COMP_DAC</name>
+        <description>ADC and DAC global interrupt,COMP1 and COMP2 interrupt through EXTI</description>
+        <value>7</value>
       </interrupt>
       <registers>
         <register>
-          <name>ISR</name>
-          <displayName>ISR</displayName>
+          <name>ADC_ISR</name>
+          <displayName>ADC_ISR</displayName>
           <description>ADC interrupt and status           register</description>
           <addressOffset>0x0</addressOffset>
           <size>0x20</size>
@@ -123,8 +123,8 @@ Copyright (c) 2020 STMicroelectronics.
           </fields>
         </register>
         <register>
-          <name>IER</name>
-          <displayName>IER</displayName>
+          <name>ADC_IER</name>
+          <displayName>ADC_IER</displayName>
           <description>ADC interrupt enable register</description>
           <addressOffset>0x4</addressOffset>
           <size>0x20</size>
@@ -194,8 +194,8 @@ Copyright (c) 2020 STMicroelectronics.
           </fields>
         </register>
         <register>
-          <name>CR</name>
-          <displayName>CR</displayName>
+          <name>ADC_CR</name>
+          <displayName>ADC_CR</displayName>
           <description>ADC control register</description>
           <addressOffset>0x8</addressOffset>
           <size>0x20</size>
@@ -241,8 +241,8 @@ Copyright (c) 2020 STMicroelectronics.
           </fields>
         </register>
         <register>
-          <name>CFGR1</name>
-          <displayName>CFGR1</displayName>
+          <name>ADC_CFGR1</name>
+          <displayName>ADC_CFGR1</displayName>
           <description>ADC configuration register 1</description>
           <addressOffset>0xC</addressOffset>
           <size>0x20</size>
@@ -348,8 +348,8 @@ Copyright (c) 2020 STMicroelectronics.
           </fields>
         </register>
         <register>
-          <name>CFGR2</name>
-          <displayName>CFGR2</displayName>
+          <name>ADC_CFGR2</name>
+          <displayName>ADC_CFGR2</displayName>
           <description>ADC configuration register 2</description>
           <addressOffset>0x10</addressOffset>
           <size>0x20</size>
@@ -425,8 +425,8 @@ Copyright (c) 2020 STMicroelectronics.
           </fields>
         </register>
         <register>
-          <name>SMPR</name>
-          <displayName>SMPR</displayName>
+          <name>ADC_SMPR</name>
+          <displayName>ADC_SMPR</displayName>
           <description>ADC sampling time register</description>
           <addressOffset>0x14</addressOffset>
           <size>0x20</size>
@@ -454,8 +454,8 @@ Copyright (c) 2020 STMicroelectronics.
           </fields>
         </register>
         <register>
-          <name>AWD1TR</name>
-          <displayName>AWD1TR</displayName>
+          <name>ADC_AWD1TR</name>
+          <displayName>ADC_AWD1TR</displayName>
           <description>ADC watchdog threshold           register</description>
           <addressOffset>0x20</addressOffset>
           <size>0x20</size>
@@ -477,8 +477,8 @@ Copyright (c) 2020 STMicroelectronics.
           </fields>
         </register>
         <register>
-          <name>AWD2TR</name>
-          <displayName>AWD2TR</displayName>
+          <name>ADC_AWD2TR</name>
+          <displayName>ADC_AWD2TR</displayName>
           <description>ADC watchdog threshold           register</description>
           <addressOffset>0x24</addressOffset>
           <size>0x20</size>
@@ -500,8 +500,8 @@ Copyright (c) 2020 STMicroelectronics.
           </fields>
         </register>
         <register>
-          <name>CHSELR0</name>
-          <displayName>CHSELR0</displayName>
+          <name>ADC_CHSELR0</name>
+          <displayName>ADC_CHSELR0</displayName>
           <description>channel selection register</description>
           <addressOffset>0x28</addressOffset>
           <size>0x20</size>
@@ -517,10 +517,10 @@ Copyright (c) 2020 STMicroelectronics.
           </fields>
         </register>
         <register>
-          <name>CHSELR1</name>
-          <displayName>CHSELR1</displayName>
+          <name>ADC_CHSELR1</name>
+          <displayName>ADC_CHSELR1</displayName>
           <description>channel selection register</description>
-          <alternateRegister>CHSELR0</alternateRegister>
+          <alternateRegister>ADC_CHSELR0</alternateRegister>
           <addressOffset>0x28</addressOffset>
           <size>0x20</size>
           <access>read-write</access>
@@ -577,8 +577,8 @@ Copyright (c) 2020 STMicroelectronics.
           </fields>
         </register>
         <register>
-          <name>AWD3TR</name>
-          <displayName>AWD3TR</displayName>
+          <name>ADC_AWD3TR</name>
+          <displayName>ADC_AWD3TR</displayName>
           <description>ADC watchdog threshold           register</description>
           <addressOffset>0x2C</addressOffset>
           <size>0x20</size>
@@ -600,8 +600,8 @@ Copyright (c) 2020 STMicroelectronics.
           </fields>
         </register>
         <register>
-          <name>DR</name>
-          <displayName>DR</displayName>
+          <name>ADC_DR</name>
+          <displayName>ADC_DR</displayName>
           <description>ADC data register</description>
           <addressOffset>0x40</addressOffset>
           <size>0x20</size>
@@ -617,8 +617,8 @@ Copyright (c) 2020 STMicroelectronics.
           </fields>
         </register>
         <register>
-          <name>AWD2CR</name>
-          <displayName>AWD2CR</displayName>
+          <name>ADC_AWD2CR</name>
+          <displayName>ADC_AWD2CR</displayName>
           <description>ADC Analog Watchdog 2 Configuration           register</description>
           <addressOffset>0xA0</addressOffset>
           <size>0x20</size>
@@ -634,8 +634,8 @@ Copyright (c) 2020 STMicroelectronics.
           </fields>
         </register>
         <register>
-          <name>AWD3CR</name>
-          <displayName>AWD3CR</displayName>
+          <name>ADC_AWD3CR</name>
+          <displayName>ADC_AWD3CR</displayName>
           <description>ADC Analog Watchdog 3 Configuration           register</description>
           <addressOffset>0xA4</addressOffset>
           <size>0x20</size>
@@ -651,8 +651,8 @@ Copyright (c) 2020 STMicroelectronics.
           </fields>
         </register>
         <register>
-          <name>CALFACT</name>
-          <displayName>CALFACT</displayName>
+          <name>ADC_CALFACT</name>
+          <displayName>ADC_CALFACT</displayName>
           <description>ADC Calibration factor</description>
           <addressOffset>0xB4</addressOffset>
           <size>0x20</size>
@@ -668,8 +668,8 @@ Copyright (c) 2020 STMicroelectronics.
           </fields>
         </register>
         <register>
-          <name>CCR</name>
-          <displayName>CCR</displayName>
+          <name>ADC_CCR</name>
+          <displayName>ADC_CCR</displayName>
           <description>ADC common configuration           register</description>
           <addressOffset>0x308</addressOffset>
           <size>0x20</size>
@@ -733,9 +733,9 @@ Copyright (c) 2020 STMicroelectronics.
         <usage>registers</usage>
       </addressBlock>
       <interrupt>
-        <name>AES</name>
-        <description>AES global interrupt</description>
-        <value>51</value>
+        <name>AES_PKA</name>
+        <description>AES global interrupt , Private key accelerator interrupt</description>
+        <value>21</value>
       </interrupt>
       <registers>
         <register>
@@ -1254,12 +1254,6 @@ Copyright (c) 2020 STMicroelectronics.
         <size>0x200</size>
         <usage>registers</usage>
       </addressBlock>
-      <interrupt>
-        <name>COMP</name>
-        <description>COMP2 and COMP1 interrupt
-         through EXTI[22:21]</description>
-        <value>21</value>
-      </interrupt>
       <registers>
         <register>
           <name>COMP1_CSR</name>
@@ -1584,11 +1578,6 @@ Copyright (c) 2020 STMicroelectronics.
         <size>0x400</size>
         <usage>registers</usage>
       </addressBlock>
-      <interrupt>
-        <name>DAC</name>
-        <description>DAC global interrupt</description>
-        <value>19</value>
-      </interrupt>
       <registers>
         <register>
           <name>CR</name>
@@ -1922,287 +1911,6 @@ Copyright (c) 2020 STMicroelectronics.
       </registers>
     </peripheral>
     <peripheral>
-      <name>DBGMCU</name>
-      <description>Microcontroller Debug Unit</description>
-      <groupName>DBGMCU</groupName>
-      <baseAddress>0xE0042000</baseAddress>
-      <addressBlock>
-        <offset>0x0</offset>
-        <size>0x400</size>
-        <usage>registers</usage>
-      </addressBlock>
-      <registers>
-        <register>
-          <name>IDCODER</name>
-          <displayName>IDCODER</displayName>
-          <description>DBGMCU Identity Code Register</description>
-          <addressOffset>0x0</addressOffset>
-          <size>0x20</size>
-          <access>read-only</access>
-          <resetValue>0x10006497</resetValue>
-          <fields>
-            <field>
-              <name>DEV_ID</name>
-              <description>Device ID</description>
-              <bitOffset>0</bitOffset>
-              <bitWidth>12</bitWidth>
-            </field>
-            <field>
-              <name>REV_ID</name>
-              <description>Revision</description>
-              <bitOffset>16</bitOffset>
-              <bitWidth>16</bitWidth>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>CR</name>
-          <displayName>CR</displayName>
-          <description>DBGMCU Configuration Register</description>
-          <addressOffset>0x4</addressOffset>
-          <size>0x20</size>
-          <access>read-write</access>
-          <resetValue>0x00000000</resetValue>
-          <fields>
-            <field>
-              <name>DBG_SLEEP</name>
-              <description>Allow debug in SLEEP mode</description>
-              <bitOffset>0</bitOffset>
-              <bitWidth>1</bitWidth>
-            </field>
-            <field>
-              <name>DBG_STOP</name>
-              <description>Allow debug in STOP mode</description>
-              <bitOffset>1</bitOffset>
-              <bitWidth>1</bitWidth>
-            </field>
-            <field>
-              <name>DBG_STANDBY</name>
-              <description>Allow debug in STANDBY               mode</description>
-              <bitOffset>2</bitOffset>
-              <bitWidth>1</bitWidth>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>APB1FZR1</name>
-          <displayName>APB1FZR1</displayName>
-          <description>DBGMCU CPU1 APB1 Peripheral Freeze Register           1</description>
-          <addressOffset>0x3C</addressOffset>
-          <size>0x20</size>
-          <access>read-write</access>
-          <resetValue>0x00000000</resetValue>
-          <fields>
-            <field>
-              <name>DBG_TIM2_STOP</name>
-              <description>TIM2 stop in CPU1 debug</description>
-              <bitOffset>0</bitOffset>
-              <bitWidth>1</bitWidth>
-            </field>
-            <field>
-              <name>DBG_RTC_STOP</name>
-              <description>RTC stop in CPU1 debug</description>
-              <bitOffset>10</bitOffset>
-              <bitWidth>1</bitWidth>
-            </field>
-            <field>
-              <name>DBG_WWDG_STOP</name>
-              <description>WWDG stop in CPU1 debug</description>
-              <bitOffset>11</bitOffset>
-              <bitWidth>1</bitWidth>
-            </field>
-            <field>
-              <name>DBG_IWDG_STOP</name>
-              <description>IWDG stop in CPU1 debug</description>
-              <bitOffset>12</bitOffset>
-              <bitWidth>1</bitWidth>
-            </field>
-            <field>
-              <name>DBG_I2C1_STOP</name>
-              <description>I2C1 SMBUS timeout stop in CPU1               debug</description>
-              <bitOffset>21</bitOffset>
-              <bitWidth>1</bitWidth>
-            </field>
-            <field>
-              <name>DBG_I2C2_STOP</name>
-              <description>I2C2 SMBUS timeout stop in CPU1               debug</description>
-              <bitOffset>22</bitOffset>
-              <bitWidth>1</bitWidth>
-            </field>
-            <field>
-              <name>DBG_I2C3_STOP</name>
-              <description>I2C3 SMBUS timeout stop in CPU1               debug</description>
-              <bitOffset>23</bitOffset>
-              <bitWidth>1</bitWidth>
-            </field>
-            <field>
-              <name>DBG_LPTIM1_STOP</name>
-              <description>LPTIM1 stop in CPU1 debug</description>
-              <bitOffset>31</bitOffset>
-              <bitWidth>1</bitWidth>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>C2APB1FZR1</name>
-          <displayName>C2APB1FZR1</displayName>
-          <description>DBGMCU CPU2 APB1 Peripheral Freeze Register           1 [dual core device</description>
-          <addressOffset>0x40</addressOffset>
-          <size>0x20</size>
-          <access>read-write</access>
-          <resetValue>0x00000000</resetValue>
-          <fields>
-            <field>
-              <name>DBG_TIM2_STOP</name>
-              <description>DBG_TIM2_STOP</description>
-              <bitOffset>0</bitOffset>
-              <bitWidth>1</bitWidth>
-            </field>
-            <field>
-              <name>DBG_RTC_STOP</name>
-              <description>DBG_RTC_STOP</description>
-              <bitOffset>10</bitOffset>
-              <bitWidth>1</bitWidth>
-            </field>
-            <field>
-              <name>DBG_IWDG_STOP</name>
-              <description>DBG_IWDG_STOP</description>
-              <bitOffset>12</bitOffset>
-              <bitWidth>1</bitWidth>
-            </field>
-            <field>
-              <name>DBG_I2C1_STOP</name>
-              <description>DBG_I2C1_STOP</description>
-              <bitOffset>21</bitOffset>
-              <bitWidth>1</bitWidth>
-            </field>
-            <field>
-              <name>DBG_I2C2_STOP</name>
-              <description>DBG_I2C2_STOP</description>
-              <bitOffset>22</bitOffset>
-              <bitWidth>1</bitWidth>
-            </field>
-            <field>
-              <name>DBG_I2C3_STOP</name>
-              <description>DBG_I2C3_STOP</description>
-              <bitOffset>23</bitOffset>
-              <bitWidth>1</bitWidth>
-            </field>
-            <field>
-              <name>DBG_LPTIM1_STOP</name>
-              <description>DBG_LPTIM1_STOP</description>
-              <bitOffset>31</bitOffset>
-              <bitWidth>1</bitWidth>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>APB1FZR2</name>
-          <displayName>APB1FZR2</displayName>
-          <description>DBGMCU CPU1 APB1 Peripheral Freeze Register           2</description>
-          <addressOffset>0x44</addressOffset>
-          <size>0x20</size>
-          <access>read-write</access>
-          <resetValue>0x00000000</resetValue>
-          <fields>
-            <field>
-              <name>DBG_LPTIM2_STOP</name>
-              <description>DBG_LPTIM2_STOP</description>
-              <bitOffset>5</bitOffset>
-              <bitWidth>1</bitWidth>
-            </field>
-            <field>
-              <name>DBG_LPTIM3_STOP</name>
-              <description>DBG_LPTIM3_STOP</description>
-              <bitOffset>6</bitOffset>
-              <bitWidth>1</bitWidth>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>C2APB1FZR2</name>
-          <displayName>C2APB1FZR2</displayName>
-          <description>DBGMCU CPU2 APB1 Peripheral Freeze Register           2 [dual core device</description>
-          <addressOffset>0x48</addressOffset>
-          <size>0x20</size>
-          <access>read-write</access>
-          <resetValue>0x00000000</resetValue>
-          <fields>
-            <field>
-              <name>DBG_LPTIM2_STOP</name>
-              <description>DBG_LPTIM2_STOP</description>
-              <bitOffset>5</bitOffset>
-              <bitWidth>1</bitWidth>
-            </field>
-            <field>
-              <name>DBG_LPTIM3_STOP</name>
-              <description>DBG_LPTIM3_STOP</description>
-              <bitOffset>6</bitOffset>
-              <bitWidth>1</bitWidth>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>APB2FZR</name>
-          <displayName>APB2FZR</displayName>
-          <description>DBGMCU CPU1 APB2 Peripheral Freeze           Register</description>
-          <addressOffset>0x4C</addressOffset>
-          <size>0x20</size>
-          <access>read-write</access>
-          <resetValue>0x00000000</resetValue>
-          <fields>
-            <field>
-              <name>DBG_TIM1_STOP</name>
-              <description>DBG_TIM1_STOP</description>
-              <bitOffset>11</bitOffset>
-              <bitWidth>1</bitWidth>
-            </field>
-            <field>
-              <name>DBG_TIM16_STOP</name>
-              <description>DBG_TIM16_STOP</description>
-              <bitOffset>17</bitOffset>
-              <bitWidth>1</bitWidth>
-            </field>
-            <field>
-              <name>DBG_TIM17_STOP</name>
-              <description>DBG_TIM17_STOP</description>
-              <bitOffset>18</bitOffset>
-              <bitWidth>1</bitWidth>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>C2APB2FZR</name>
-          <displayName>C2APB2FZR</displayName>
-          <description>DBGMCU CPU2 APB2 Peripheral Freeze Register           [dual core device</description>
-          <addressOffset>0x50</addressOffset>
-          <size>0x20</size>
-          <access>read-write</access>
-          <resetValue>0x00000000</resetValue>
-          <fields>
-            <field>
-              <name>DBG_TIM1_STOP</name>
-              <description>DBG_TIM1_STOP</description>
-              <bitOffset>11</bitOffset>
-              <bitWidth>1</bitWidth>
-            </field>
-            <field>
-              <name>DBG_TIM16_STOP</name>
-              <description>DBG_TIM16_STOP</description>
-              <bitOffset>17</bitOffset>
-              <bitWidth>1</bitWidth>
-            </field>
-            <field>
-              <name>DBG_TIM17_STOP</name>
-              <description>DBG_TIM17_STOP</description>
-              <bitOffset>18</bitOffset>
-              <bitWidth>1</bitWidth>
-            </field>
-          </fields>
-        </register>
-      </registers>
-    </peripheral>
-    <peripheral>
       <name>DMA1</name>
       <description>Direct memory access controller</description>
       <groupName>DMA</groupName>
@@ -2213,39 +1921,16 @@ Copyright (c) 2020 STMicroelectronics.
         <usage>registers</usage>
       </addressBlock>
       <interrupt>
-        <name>DMA1_CH1</name>
-        <description>DMA1 channel 1 non-secure interrupt</description>
-        <value>11</value>
+        <name>DMA1_CH3_1</name>
+        <description>DMA1 channel 3:1 secure and non-secure interrupt
+        (C2IMR2[2:0])</description>
+        <value>8</value>
       </interrupt>
       <interrupt>
-        <name>DMA1_CH2</name>
-        <description>DMA1 channel 2 non-secure interrupt</description>
-        <value>12</value>
-      </interrupt>
-      <interrupt>
-        <name>DMA1_CH3</name>
-        <description>DMA1 channel 3 non-secure interrupt</description>
-        <value>13</value>
-      </interrupt>
-      <interrupt>
-        <name>DMA1_CH4</name>
-        <description>DMA1 channel 4 non-secure interrupt</description>
-        <value>14</value>
-      </interrupt>
-      <interrupt>
-        <name>DMA1_CH5</name>
-        <description>DMA1 channel 5 non-secure interrupt</description>
-        <value>15</value>
-      </interrupt>
-      <interrupt>
-        <name>DMA1_CH6</name>
-        <description>DMA1 channel 6 non-secure interrupt</description>
-        <value>16</value>
-      </interrupt>
-      <interrupt>
-        <name>DMA1_CH7</name>
-        <description>DMA1 channel 7 non-secure interrupt</description>
-        <value>17</value>
+        <name>DMA1_CH7_4</name>
+        <description>DMA1 channel 7:4 secure and non-secure interrupt
+       (C2IMR2[6:3])</description>
+        <value>9</value>
       </interrupt>
       <registers>
         <register>
@@ -3718,39 +3403,10 @@ Copyright (c) 2020 STMicroelectronics.
       <name>DMA2</name>
       <baseAddress>0x40020400</baseAddress>
       <interrupt>
-        <name>DMA2_CH1</name>
-        <description>DMA2 channel 1 non-secure interrupt</description>
-        <value>54</value>
-      </interrupt>
-      <interrupt>
-        <name>DMA2_CH2</name>
-        <description>DMA2 channel 2 non-secure interrupt</description>
-        <value>55</value>
-      </interrupt>
-      <interrupt>
-        <name>DMA2_CH3</name>
-        <description>DMA2 channel 3 non-secure interrupt</description>
-        <value>56</value>
-      </interrupt>
-      <interrupt>
-        <name>DMA2_CH4</name>
-        <description>DMA2 channel 4 non-secure interrupt</description>
-        <value>57</value>
-      </interrupt>
-      <interrupt>
-        <name>DMA2_CH5</name>
-        <description>DMA2 channel 5 non-secure interrupt</description>
-        <value>58</value>
-      </interrupt>
-      <interrupt>
-        <name>DMA2_CH6</name>
-        <description>DMA2 channel 6 non-secure interrupt</description>
-        <value>59</value>
-      </interrupt>
-      <interrupt>
-        <name>DMA2_CH7</name>
-        <description>DMA2 channel 7 non-secure interrupt</description>
-        <value>60</value>
+        <name>DMA2_CH7_1_DMAMUX1_OVR</name>
+        <description>DMA2 channel 7:1 secure and non-secure interrupt
+       (C2IMR2[14:8]),DMAMUX1 overrun interrupt (C2IMR2[15])</description>
+        <value>10</value>
       </interrupt>
     </peripheral>
     <peripheral>
@@ -3763,11 +3419,6 @@ Copyright (c) 2020 STMicroelectronics.
         <size>0x400</size>
         <usage>registers</usage>
       </addressBlock>
-      <interrupt>
-        <name>DMAMUX1_OVR</name>
-        <description>DMAMUX1 overrun interrupt</description>
-        <value>61</value>
-      </interrupt>
       <registers>
         <register>
           <name>C0CR</name>
@@ -4949,820 +4600,1593 @@ Copyright (c) 2020 STMicroelectronics.
       </addressBlock>
       <interrupt>
         <name>PVD_PVM_3</name>
-        <description>PVD through EXTI[16],
-             PVM[3] through EXTI[34]</description>
+        <description>PVD through EXTI[16], PVM[3] through EXTI[34]</description>
         <value>1</value>
       </interrupt>
       <interrupt>
-        <name>EXTI0</name>
+        <name>EXTI1_0</name>
         <description>EXTI line 0 interrupt through
         EXTI</description>
-        <value>6</value>
+        <value>4</value>
       </interrupt>
       <interrupt>
-        <name>EXTI1</name>
+        <name>EXTI3_2</name>
         <description>EXTI line 1 interrupt through
         EXTI</description>
-        <value>7</value>
+        <value>5</value>
       </interrupt>
       <interrupt>
-        <name>EXTI2</name>
+        <name>EXTI15_4</name>
         <description>EXTI line 2 interrupt through
         EXTI</description>
-        <value>8</value>
-      </interrupt>
-      <interrupt>
-        <name>EXTI3</name>
-        <description>EXTI line 3 interrupt through
-        EXTI</description>
-        <value>9</value>
-      </interrupt>
-      <interrupt>
-        <name>EXTI4</name>
-        <description>EXTI line 4 interrupt through
-        EXTI</description>
-        <value>10</value>
-      </interrupt>
-      <interrupt>
-        <name>EXTI9_5</name>
-        <description>EXTI line 9_5 interrupt through
-        EXTI</description>
-        <value>22</value>
-      </interrupt>
-      <interrupt>
-        <name>EXTI15_10</name>
-        <description>EXTI line 15_10] interrupt through
-        EXTI</description>
-        <value>41</value>
+        <value>6</value>
       </interrupt>
       <interrupt>
         <name>Radio_IRQ_Busy</name>
         <description>Radio IRQs, RFBUSY interrupt through
         EXTI</description>
-        <value>50</value>
+        <value>31</value>
       </interrupt>
       <registers>
         <register>
-          <name>RTSR1</name>
-          <displayName>RTSR1</displayName>
-          <description>rising trigger selection           register</description>
-          <addressOffset>0x0</addressOffset>
+          <name>EXTI_RTSR1</name>
+          <displayName>EXTI_RTSR1</displayName>
+          <description>EXTI rising trigger selection register</description>
+          <addressOffset>0x000</addressOffset>
           <size>0x20</size>
           <access>read-write</access>
           <resetValue>0x00000000</resetValue>
+          <resetMask>0xFFFFFFFF</resetMask>
           <fields>
             <field>
-              <name>RT</name>
-              <description>Rising trigger event configuration bit               of Configurable Event input</description>
+              <name>RT0</name>
+              <description>rising trigger event configuration bit of configurable event input 0</description>
               <bitOffset>0</bitOffset>
-              <bitWidth>17</bitWidth>
+              <bitWidth>1</bitWidth>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>RT1</name>
+              <description>rising trigger event configuration bit of configurable event input 1</description>
+              <bitOffset>1</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>RT2</name>
+              <description>rising trigger event configuration bit of configurable event input 2</description>
+              <bitOffset>2</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>RT3</name>
+              <description>rising trigger event configuration bit of configurable event input 3</description>
+              <bitOffset>3</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>RT4</name>
+              <description>rising trigger event configuration bit of configurable event input 4</description>
+              <bitOffset>4</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>RT5</name>
+              <description>rising trigger event configuration bit of configurable event input 5</description>
+              <bitOffset>5</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>RT6</name>
+              <description>rising trigger event configuration bit of configurable event input 6</description>
+              <bitOffset>6</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>RT7</name>
+              <description>rising trigger event configuration bit of configurable event input 7</description>
+              <bitOffset>7</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>RT8</name>
+              <description>rising trigger event configuration bit of configurable event input 8</description>
+              <bitOffset>8</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>RT9</name>
+              <description>rising trigger event configuration bit of configurable event input 9</description>
+              <bitOffset>9</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>RT10</name>
+              <description>rising trigger event configuration bit of configurable event input 10</description>
+              <bitOffset>10</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>RT11</name>
+              <description>rising trigger event configuration bit of configurable event input 11</description>
+              <bitOffset>11</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>RT12</name>
+              <description>rising trigger event configuration bit of configurable event input 12</description>
+              <bitOffset>12</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>RT13</name>
+              <description>rising trigger event configuration bit of configurable event input 13</description>
+              <bitOffset>13</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>RT14</name>
+              <description>rising trigger event configuration bit of configurable event input 14</description>
+              <bitOffset>14</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>RT15</name>
+              <description>rising trigger event configuration bit of configurable event input 15</description>
+              <bitOffset>15</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>RT16</name>
+              <description>rising trigger event configuration bit of configurable event input 16</description>
+              <bitOffset>16</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>read-write</access>
             </field>
             <field>
               <name>RT21</name>
-              <description>Rising trigger event configuration bit               of Configurable Event input</description>
+              <description>rising trigger event configuration bit of configurable event input 21</description>
               <bitOffset>21</bitOffset>
-              <bitWidth>2</bitWidth>
+              <bitWidth>1</bitWidth>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>RT22</name>
+              <description>rising trigger event configuration bit of configurable event input 22
+Note: The configurable event inputs are edge triggered. No glitch must be generated on these inputs. If a rising edge on the configurable event input occurs while writing to the register, the associated pending bit is not set.
+Note: Rising and falling edge triggers can be set for the same configurable event input. In this case, both edges generate a trigger.</description>
+              <bitOffset>22</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>read-write</access>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>B_0x0</name>
+                  <description>Rising trigger disabled (for event and interrupt) for input line</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>B_0x1</name>
+                  <description>Rising trigger enabled (for event and interrupt) for input line</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
             </field>
           </fields>
         </register>
         <register>
-          <name>FTSR1</name>
-          <displayName>FTSR1</displayName>
-          <description>falling trigger selection           register</description>
-          <addressOffset>0x4</addressOffset>
+          <name>EXTI_FTSR1</name>
+          <displayName>EXTI_FTSR1</displayName>
+          <description>EXTI falling trigger selection register</description>
+          <addressOffset>0x004</addressOffset>
           <size>0x20</size>
           <access>read-write</access>
           <resetValue>0x00000000</resetValue>
+          <resetMask>0xFFFFFFFF</resetMask>
           <fields>
             <field>
-              <name>FT</name>
-              <description>Falling trigger event configuration bit               of Configurable Event input</description>
+              <name>FT0</name>
+              <description>falling trigger event configuration bit of configurable event input 0</description>
               <bitOffset>0</bitOffset>
-              <bitWidth>17</bitWidth>
+              <bitWidth>1</bitWidth>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>FT1</name>
+              <description>falling trigger event configuration bit of configurable event input 1</description>
+              <bitOffset>1</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>FT2</name>
+              <description>falling trigger event configuration bit of configurable event input 2</description>
+              <bitOffset>2</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>FT3</name>
+              <description>falling trigger event configuration bit of configurable event input 3</description>
+              <bitOffset>3</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>FT4</name>
+              <description>falling trigger event configuration bit of configurable event input 4</description>
+              <bitOffset>4</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>FT5</name>
+              <description>falling trigger event configuration bit of configurable event input 5</description>
+              <bitOffset>5</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>FT6</name>
+              <description>falling trigger event configuration bit of configurable event input 6</description>
+              <bitOffset>6</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>FT7</name>
+              <description>falling trigger event configuration bit of configurable event input 7</description>
+              <bitOffset>7</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>FT8</name>
+              <description>falling trigger event configuration bit of configurable event input 8</description>
+              <bitOffset>8</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>FT9</name>
+              <description>falling trigger event configuration bit of configurable event input 9</description>
+              <bitOffset>9</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>FT10</name>
+              <description>falling trigger event configuration bit of configurable event input 10</description>
+              <bitOffset>10</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>FT11</name>
+              <description>falling trigger event configuration bit of configurable event input 11</description>
+              <bitOffset>11</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>FT12</name>
+              <description>falling trigger event configuration bit of configurable event input 12</description>
+              <bitOffset>12</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>FT13</name>
+              <description>falling trigger event configuration bit of configurable event input 13</description>
+              <bitOffset>13</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>FT14</name>
+              <description>falling trigger event configuration bit of configurable event input 14</description>
+              <bitOffset>14</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>FT15</name>
+              <description>falling trigger event configuration bit of configurable event input 15</description>
+              <bitOffset>15</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>FT16</name>
+              <description>falling trigger event configuration bit of configurable event input 16</description>
+              <bitOffset>16</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>read-write</access>
             </field>
             <field>
               <name>FT21</name>
-              <description>Falling trigger event configuration bit               of Configurable Event input</description>
+              <description>falling trigger event configuration bit of configurable event input 21</description>
               <bitOffset>21</bitOffset>
-              <bitWidth>2</bitWidth>
+              <bitWidth>1</bitWidth>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>FT22</name>
+              <description>falling trigger event configuration bit of configurable event input 22
+Note: The configurable event inputs are edge triggered. No glitch must be generated on these inputs. If a falling edge on the configurable event input occurs while writing to the register, the associated pending bit is not set.
+Note: Rising and falling edge triggers can be set for the same configurable event input. In this case, both edges generate a trigger.</description>
+              <bitOffset>22</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>read-write</access>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>B_0x0</name>
+                  <description>falling trigger disabled (for event and interrupt) for input line</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>B_0x1</name>
+                  <description>falling trigger enabled (for event and interrupt) for input line</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
             </field>
           </fields>
         </register>
         <register>
-          <name>SWIER1</name>
-          <displayName>SWIER1</displayName>
-          <description>software interrupt event           register</description>
-          <addressOffset>0x8</addressOffset>
+          <name>EXTI_SWIER1</name>
+          <displayName>EXTI_SWIER1</displayName>
+          <description>EXTI software interrupt event register</description>
+          <addressOffset>0x008</addressOffset>
           <size>0x20</size>
           <access>read-write</access>
           <resetValue>0x00000000</resetValue>
+          <resetMask>0xFFFFFFFF</resetMask>
           <fields>
             <field>
-              <name>SWI</name>
-              <description>Software interrupt on               event</description>
+              <name>SWI0</name>
+              <description>Software interrupt on line 0</description>
               <bitOffset>0</bitOffset>
-              <bitWidth>17</bitWidth>
+              <bitWidth>1</bitWidth>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>SWI1</name>
+              <description>Software interrupt on line 1</description>
+              <bitOffset>1</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>SWI2</name>
+              <description>Software interrupt on line 2</description>
+              <bitOffset>2</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>SWI3</name>
+              <description>Software interrupt on line 3</description>
+              <bitOffset>3</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>SWI4</name>
+              <description>Software interrupt on line 4</description>
+              <bitOffset>4</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>SWI5</name>
+              <description>Software interrupt on line 5</description>
+              <bitOffset>5</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>SWI6</name>
+              <description>Software interrupt on line 6</description>
+              <bitOffset>6</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>SWI7</name>
+              <description>Software interrupt on line 7</description>
+              <bitOffset>7</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>SWI8</name>
+              <description>Software interrupt on line 8</description>
+              <bitOffset>8</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>SWI9</name>
+              <description>Software interrupt on line 9</description>
+              <bitOffset>9</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>SWI10</name>
+              <description>Software interrupt on line 10</description>
+              <bitOffset>10</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>SWI11</name>
+              <description>Software interrupt on line 11</description>
+              <bitOffset>11</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>SWI12</name>
+              <description>Software interrupt on line 12</description>
+              <bitOffset>12</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>SWI13</name>
+              <description>Software interrupt on line 13</description>
+              <bitOffset>13</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>SWI14</name>
+              <description>Software interrupt on line 14</description>
+              <bitOffset>14</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>SWI15</name>
+              <description>Software interrupt on line 15</description>
+              <bitOffset>15</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>SWI16</name>
+              <description>Software interrupt on line 16</description>
+              <bitOffset>16</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>read-write</access>
             </field>
             <field>
               <name>SWI21</name>
-              <description>Software interrupt on               event</description>
+              <description>Software interrupt on line 21</description>
               <bitOffset>21</bitOffset>
-              <bitWidth>2</bitWidth>
+              <bitWidth>1</bitWidth>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>SWI22</name>
+              <description>Software interrupt on line 22
+A software interrupt is generated independently from the setting in EXTI_RTSR and EXTI_FTSR. This bit always returns 0 when read.
+This bit is automatically cleared by hardware.</description>
+              <bitOffset>22</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>read-write</access>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>B_0x0</name>
+                  <description>Writing 0 has no effect.</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>B_0x1</name>
+                  <description>Writing 1 to this bit triggers an event on line 22.</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
             </field>
           </fields>
         </register>
         <register>
-          <name>PR1</name>
-          <displayName>PR1</displayName>
+          <name>EXTI_PR1</name>
+          <displayName>EXTI_PR1</displayName>
           <description>EXTI pending register</description>
-          <addressOffset>0xC</addressOffset>
+          <addressOffset>0x00C</addressOffset>
           <size>0x20</size>
           <access>read-write</access>
           <resetValue>0x00000000</resetValue>
+          <resetMask>0xFFFFFFFF</resetMask>
           <fields>
             <field>
-              <name>PIF</name>
-              <description>Configurable event inputs Pending               bit</description>
+              <name>PIF0</name>
+              <description>pending bit on event input 0</description>
               <bitOffset>0</bitOffset>
-              <bitWidth>17</bitWidth>
+              <bitWidth>1</bitWidth>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>PIF1</name>
+              <description>pending bit on event input 1</description>
+              <bitOffset>1</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>PIF2</name>
+              <description>pending bit on event input 2</description>
+              <bitOffset>2</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>PIF3</name>
+              <description>pending bit on event input 3</description>
+              <bitOffset>3</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>PIF4</name>
+              <description>pending bit on event input 4</description>
+              <bitOffset>4</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>PIF5</name>
+              <description>pending bit on event input 5</description>
+              <bitOffset>5</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>PIF6</name>
+              <description>pending bit on event input 6</description>
+              <bitOffset>6</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>PIF7</name>
+              <description>pending bit on event input 7</description>
+              <bitOffset>7</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>PIF8</name>
+              <description>pending bit on event input 8</description>
+              <bitOffset>8</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>PIF9</name>
+              <description>pending bit on event input 9</description>
+              <bitOffset>9</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>PIF10</name>
+              <description>pending bit on event input 10</description>
+              <bitOffset>10</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>PIF11</name>
+              <description>pending bit on event input 11</description>
+              <bitOffset>11</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>PIF12</name>
+              <description>pending bit on event input 12</description>
+              <bitOffset>12</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>PIF13</name>
+              <description>pending bit on event input 13</description>
+              <bitOffset>13</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>PIF14</name>
+              <description>pending bit on event input 14</description>
+              <bitOffset>14</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>PIF15</name>
+              <description>pending bit on event input 15</description>
+              <bitOffset>15</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>PIF16</name>
+              <description>pending bit on event input 16</description>
+              <bitOffset>16</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>read-write</access>
             </field>
             <field>
               <name>PIF21</name>
-              <description>Configurable event inputs Pending               bit</description>
+              <description>pending bit on event input 21</description>
               <bitOffset>21</bitOffset>
-              <bitWidth>2</bitWidth>
+              <bitWidth>1</bitWidth>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>PIF22</name>
+              <description>pending bit on event input 22
+These bits are set when the selected edge event or an EXTI_SWIER software trigger arrives on the configurable event line. This bit is cleared by writing 1 to it.</description>
+              <bitOffset>22</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>read-write</access>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>B_0x0</name>
+                  <description>No trigger request occurred.</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>B_0x1</name>
+                  <description>Trigger request occurred.</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
             </field>
           </fields>
         </register>
         <register>
-          <name>RTSR2</name>
-          <displayName>RTSR2</displayName>
-          <description>rising trigger selection           register</description>
-          <addressOffset>0x20</addressOffset>
+          <name>EXTI_RTSR2</name>
+          <displayName>EXTI_RTSR2</displayName>
+          <description>EXTI rising trigger selection register</description>
+          <addressOffset>0x020</addressOffset>
           <size>0x20</size>
           <access>read-write</access>
           <resetValue>0x00000000</resetValue>
+          <resetMask>0xFFFFFFFF</resetMask>
           <fields>
             <field>
               <name>RT34</name>
-              <description>Rising trigger event configuration bit               of Configurable Event input</description>
+              <description>rising trigger event configuration bit of configurable event input 34</description>
               <bitOffset>2</bitOffset>
               <bitWidth>1</bitWidth>
+              <access>read-write</access>
             </field>
             <field>
               <name>RT40</name>
-              <description>Rising trigger event configuration bit               of Configurable Event input</description>
+              <description>rising trigger event configuration bit of configurable event input 40</description>
               <bitOffset>8</bitOffset>
               <bitWidth>1</bitWidth>
+              <access>read-write</access>
             </field>
             <field>
               <name>RT41</name>
-              <description>Rising trigger event configuration bit               of Configurable Event input</description>
+              <description>rising trigger event configuration bit of configurable event input 41</description>
               <bitOffset>9</bitOffset>
               <bitWidth>1</bitWidth>
+              <access>read-write</access>
             </field>
             <field>
               <name>RT45</name>
-              <description>Rising trigger event configuration bit               of Configurable Event input</description>
+              <description>rising trigger event configuration bit of configurable event input 45
+Note: The configurable event inputs are edge triggered. No glitch must be generated on these inputs. If a rising edge on the configurable event input occurs while writing to the register, the associated pending bit is not set.
+Note: Rising and falling edge triggers can be set for the same configurable event input. In this case, both edges generate a trigger.</description>
               <bitOffset>13</bitOffset>
               <bitWidth>1</bitWidth>
+              <access>read-write</access>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>B_0x0</name>
+                  <description>Rising trigger disabled (for event and interrupt) for input line</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>B_0x1</name>
+                  <description>Rising trigger enabled (for event and interrupt) for input line</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
             </field>
           </fields>
         </register>
         <register>
-          <name>FTSR2</name>
-          <displayName>FTSR2</displayName>
-          <description>falling trigger selection           register</description>
-          <addressOffset>0x24</addressOffset>
+          <name>EXTI_FTSR2</name>
+          <displayName>EXTI_FTSR2</displayName>
+          <description>EXTI falling trigger selection register</description>
+          <addressOffset>0x024</addressOffset>
           <size>0x20</size>
           <access>read-write</access>
           <resetValue>0x00000000</resetValue>
+          <resetMask>0xFFFFFFFF</resetMask>
           <fields>
             <field>
               <name>FT34</name>
-              <description>Falling trigger event configuration bit               of Configurable Event input</description>
+              <description>falling trigger event configuration bit of configurable event input 34</description>
               <bitOffset>2</bitOffset>
               <bitWidth>1</bitWidth>
+              <access>read-write</access>
             </field>
             <field>
               <name>FT40</name>
-              <description>Falling trigger event configuration bit               of Configurable Event input</description>
+              <description>falling trigger event configuration bit of configurable event input 40</description>
               <bitOffset>8</bitOffset>
               <bitWidth>1</bitWidth>
+              <access>read-write</access>
             </field>
             <field>
               <name>FT41</name>
-              <description>Falling trigger event configuration bit               of Configurable Event input</description>
+              <description>falling trigger event configuration bit of configurable event input 41</description>
               <bitOffset>9</bitOffset>
               <bitWidth>1</bitWidth>
+              <access>read-write</access>
             </field>
             <field>
               <name>FT45</name>
-              <description>Falling trigger event configuration bit               of Configurable Event input</description>
+              <description>falling trigger event configuration bit of configurable event input 45
+Note: The configurable event inputs are edge triggered. No glitch must be generated on these inputs. If a falling edge on the configurable event input occurs while writing to the register, the associated pending bit is not set.
+Note: Rising and falling edge triggers can be set for the same configurable event input. In this case, both edges generate a trigger.</description>
               <bitOffset>13</bitOffset>
               <bitWidth>1</bitWidth>
+              <access>read-write</access>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>B_0x0</name>
+                  <description>Falling trigger disabled (for event and interrupt) for input line</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>B_0x1</name>
+                  <description>Falling trigger enabled (for event and interrupt) for input line</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
             </field>
           </fields>
         </register>
         <register>
-          <name>SWIER2</name>
-          <displayName>SWIER2</displayName>
-          <description>software interrupt event           register</description>
-          <addressOffset>0x28</addressOffset>
+          <name>EXTI_SWIER2</name>
+          <displayName>EXTI_SWIER2</displayName>
+          <description>EXTI software interrupt event register</description>
+          <addressOffset>0x028</addressOffset>
           <size>0x20</size>
           <access>read-write</access>
           <resetValue>0x00000000</resetValue>
+          <resetMask>0xFFFFFFFF</resetMask>
           <fields>
             <field>
               <name>SWI34</name>
-              <description>Software interrupt on               event</description>
+              <description>software interrupt on event 34</description>
               <bitOffset>2</bitOffset>
               <bitWidth>1</bitWidth>
+              <access>read-write</access>
             </field>
             <field>
               <name>SWI40</name>
-              <description>Software interrupt on               event</description>
+              <description>software interrupt on event 40</description>
               <bitOffset>8</bitOffset>
               <bitWidth>1</bitWidth>
+              <access>read-write</access>
             </field>
             <field>
               <name>SWI41</name>
-              <description>Software interrupt on               event</description>
+              <description>software interrupt on event 41</description>
               <bitOffset>9</bitOffset>
               <bitWidth>1</bitWidth>
+              <access>read-write</access>
             </field>
             <field>
               <name>SWI45</name>
-              <description>Software interrupt on event               45</description>
+              <description>software interrupt on event 45
+A software interrupt is generated independently from the setting in EXTI_RTSR and EXTI_FTSR. This bit always returns 0 when read.
+This bit is automatically cleared by hardware.</description>
               <bitOffset>13</bitOffset>
               <bitWidth>1</bitWidth>
+              <access>read-write</access>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>B_0x0</name>
+                  <description>Writing 0 has no effect.</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>B_0x1</name>
+                  <description>Writing 1 to this bit triggers an event on line 45.</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
             </field>
           </fields>
         </register>
         <register>
-          <name>PR2</name>
-          <displayName>PR2</displayName>
-          <description>pending register</description>
-          <addressOffset>0x2C</addressOffset>
+          <name>EXTI_PR2</name>
+          <displayName>EXTI_PR2</displayName>
+          <description>EXTI pending register</description>
+          <addressOffset>0x02C</addressOffset>
           <size>0x20</size>
           <access>read-write</access>
           <resetValue>0x00000000</resetValue>
+          <resetMask>0xFFFFFFFF</resetMask>
           <fields>
             <field>
               <name>PIF34</name>
-              <description>Configurable event inputs 33 Pending               bit.</description>
+              <description>pending bit on event input 34</description>
               <bitOffset>2</bitOffset>
               <bitWidth>1</bitWidth>
+              <access>read-write</access>
             </field>
             <field>
               <name>PIF40</name>
-              <description>Configurable event inputs 40_41 Pending               bit.</description>
+              <description>pending bit on event input 40</description>
               <bitOffset>8</bitOffset>
               <bitWidth>1</bitWidth>
+              <access>read-write</access>
             </field>
             <field>
               <name>PIF41</name>
-              <description>Configurable event inputs 40_41 Pending               bit.</description>
+              <description>pending bit on event input 41</description>
               <bitOffset>9</bitOffset>
               <bitWidth>1</bitWidth>
+              <access>read-write</access>
             </field>
             <field>
               <name>PIF45</name>
-              <description>Configurable event inputs 45 Pending               bit.</description>
+              <description>pending bit on event input 45
+These bits are set when the selected edge event or an EXTI_SWIER software trigger arrives on the configurable event line. This bit is cleared by writing 1 to it.</description>
               <bitOffset>13</bitOffset>
               <bitWidth>1</bitWidth>
+              <access>read-write</access>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>B_0x0</name>
+                  <description>No trigger request occurred.</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>B_0x1</name>
+                  <description>Trigger request occurred.</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
             </field>
           </fields>
         </register>
         <register>
-          <name>C1IMR1</name>
-          <displayName>C1IMR1</displayName>
-          <description>interrupt mask           register</description>
-          <addressOffset>0x80</addressOffset>
+          <name>EXTI_C1IMR1</name>
+          <displayName>EXTI_C1IMR1</displayName>
+          <description>EXTI interrupt mask register</description>
+          <addressOffset>0x080</addressOffset>
           <size>0x20</size>
           <access>read-write</access>
           <resetValue>0x00000000</resetValue>
+          <resetMask>0xFFFFFFFF</resetMask>
           <fields>
             <field>
               <name>IM</name>
-              <description>wakeup with interrupt Mask on               event input</description>
+              <description>Wake-up with interrupt mask on event input x
+For each bit of this field:</description>
               <bitOffset>0</bitOffset>
               <bitWidth>32</bitWidth>
+              <access>read-write</access>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>B_0x0</name>
+                  <description>Wake-up with interrupt request from line x is masked.</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>B_0x1</name>
+                  <description>Wake-up with Interrupt request from line x is unmasked.</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
             </field>
           </fields>
         </register>
         <register>
-          <name>C1EMR1</name>
-          <displayName>C1EMR1</displayName>
-          <description>event mask           register</description>
-          <addressOffset>0x84</addressOffset>
+          <name>EXTI_C1EMR1</name>
+          <displayName>EXTI_C1EMR1</displayName>
+          <description>EXTI event mask register</description>
+          <addressOffset>0x084</addressOffset>
           <size>0x20</size>
           <access>read-write</access>
           <resetValue>0x00000000</resetValue>
+          <resetMask>0xFFFFFFFF</resetMask>
           <fields>
             <field>
               <name>EM0</name>
-              <description>Wakeup with event generation Mask               on Event input</description>
+              <description>Wake-up with event generation mask on event input 0</description>
               <bitOffset>0</bitOffset>
               <bitWidth>1</bitWidth>
+              <access>read-write</access>
             </field>
             <field>
               <name>EM1</name>
-              <description>Wakeup with event generation Mask               on Event input</description>
+              <description>Wake-up with event generation mask on event input 1</description>
               <bitOffset>1</bitOffset>
               <bitWidth>1</bitWidth>
+              <access>read-write</access>
             </field>
             <field>
               <name>EM2</name>
-              <description>Wakeup with event generation Mask               on Event input</description>
+              <description>Wake-up with event generation mask on event input 2</description>
               <bitOffset>2</bitOffset>
               <bitWidth>1</bitWidth>
+              <access>read-write</access>
             </field>
             <field>
               <name>EM3</name>
-              <description>Wakeup with event generation Mask               on Event input</description>
+              <description>Wake-up with event generation mask on event input 3</description>
               <bitOffset>3</bitOffset>
               <bitWidth>1</bitWidth>
+              <access>read-write</access>
             </field>
             <field>
               <name>EM4</name>
-              <description>Wakeup with event generation Mask               on Event input</description>
+              <description>Wake-up with event generation mask on event input 4</description>
               <bitOffset>4</bitOffset>
               <bitWidth>1</bitWidth>
+              <access>read-write</access>
             </field>
             <field>
               <name>EM5</name>
-              <description>Wakeup with event generation Mask               on Event input</description>
+              <description>Wake-up with event generation mask on event input 5</description>
               <bitOffset>5</bitOffset>
               <bitWidth>1</bitWidth>
+              <access>read-write</access>
             </field>
             <field>
               <name>EM6</name>
-              <description>Wakeup with event generation Mask               on Event input</description>
+              <description>Wake-up with event generation mask on event input 6</description>
               <bitOffset>6</bitOffset>
               <bitWidth>1</bitWidth>
+              <access>read-write</access>
             </field>
             <field>
               <name>EM7</name>
-              <description>Wakeup with event generation Mask               on Event input</description>
+              <description>Wake-up with event generation mask on event input 7</description>
               <bitOffset>7</bitOffset>
               <bitWidth>1</bitWidth>
+              <access>read-write</access>
             </field>
             <field>
               <name>EM8</name>
-              <description>Wakeup with event generation Mask               on Event input</description>
+              <description>Wake-up with event generation mask on event input 8</description>
               <bitOffset>8</bitOffset>
               <bitWidth>1</bitWidth>
+              <access>read-write</access>
             </field>
             <field>
               <name>EM9</name>
-              <description>Wakeup with event generation Mask               on Event input</description>
+              <description>Wake-up with event generation mask on event input 19</description>
               <bitOffset>9</bitOffset>
               <bitWidth>1</bitWidth>
+              <access>read-write</access>
             </field>
             <field>
               <name>EM10</name>
-              <description>Wakeup with event generation Mask               on Event input</description>
+              <description>Wake-up with event generation mask on event input 10</description>
               <bitOffset>10</bitOffset>
               <bitWidth>1</bitWidth>
+              <access>read-write</access>
             </field>
             <field>
               <name>EM11</name>
-              <description>Wakeup with event generation Mask               on Event input</description>
+              <description>Wake-up with event generation mask on event input 11</description>
               <bitOffset>11</bitOffset>
               <bitWidth>1</bitWidth>
+              <access>read-write</access>
             </field>
             <field>
               <name>EM12</name>
-              <description>Wakeup with event generation Mask               on Event input</description>
+              <description>Wake-up with event generation mask on event input 12</description>
               <bitOffset>12</bitOffset>
               <bitWidth>1</bitWidth>
+              <access>read-write</access>
             </field>
             <field>
               <name>EM13</name>
-              <description>Wakeup with event generation Mask               on Event input</description>
+              <description>Wake-up with event generation mask on event input 13</description>
               <bitOffset>13</bitOffset>
               <bitWidth>1</bitWidth>
+              <access>read-write</access>
             </field>
             <field>
               <name>EM14</name>
-              <description>Wakeup with event generation Mask               on Event input</description>
+              <description>Wake-up with event generation mask on event input 14</description>
               <bitOffset>14</bitOffset>
               <bitWidth>1</bitWidth>
+              <access>read-write</access>
             </field>
             <field>
               <name>EM15</name>
-              <description>Wakeup with event generation Mask               on Event input</description>
+              <description>Wake-up with event generation mask on event input 15</description>
               <bitOffset>15</bitOffset>
               <bitWidth>1</bitWidth>
+              <access>read-write</access>
             </field>
             <field>
               <name>EM17</name>
-              <description>Wakeup with event generation Mask               on Event input</description>
+              <description>Wake-up with event generation mask on event input 17</description>
               <bitOffset>17</bitOffset>
               <bitWidth>1</bitWidth>
+              <access>read-write</access>
             </field>
             <field>
               <name>EM18</name>
-              <description>Wakeup with event generation Mask               on Event input</description>
+              <description>Wake-up with event generation mask on event input 18</description>
               <bitOffset>18</bitOffset>
               <bitWidth>1</bitWidth>
+              <access>read-write</access>
             </field>
             <field>
               <name>EM19</name>
-              <description>Wakeup with event generation Mask               on Event input</description>
+              <description>Wake-up with event generation mask on event input 19</description>
               <bitOffset>19</bitOffset>
               <bitWidth>1</bitWidth>
+              <access>read-write</access>
             </field>
             <field>
               <name>EM20</name>
-              <description>Wakeup with event generation Mask               on Event input</description>
+              <description>Wake-up with event generation mask on event input 20</description>
               <bitOffset>20</bitOffset>
               <bitWidth>1</bitWidth>
+              <access>read-write</access>
             </field>
             <field>
               <name>EM21</name>
-              <description>Wakeup with event generation Mask               on Event input</description>
+              <description>Wake-up with event generation mask on event input 21</description>
               <bitOffset>21</bitOffset>
               <bitWidth>1</bitWidth>
+              <access>read-write</access>
             </field>
             <field>
               <name>EM22</name>
-              <description>Wakeup with event generation Mask               on Event input</description>
+              <description>Wake-up with event generation mask on event input 22</description>
               <bitOffset>22</bitOffset>
               <bitWidth>1</bitWidth>
+              <access>read-write</access>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>B_0x0</name>
+                  <description>Event request from line 22 is masked.</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>B_0x1</name>
+                  <description>Event request from line 22 is unmasked.</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
             </field>
           </fields>
         </register>
         <register>
-          <name>C1IMR2</name>
-          <displayName>C1IMR2</displayName>
-          <description>wakeup with interrupt mask           register</description>
-          <addressOffset>0x90</addressOffset>
+          <name>EXTI_C1IMR2</name>
+          <displayName>EXTI_C1IMR2</displayName>
+          <description>EXTI interrupt mask register</description>
+          <addressOffset>0x090</addressOffset>
           <size>0x20</size>
           <access>read-write</access>
           <resetValue>0x00000000</resetValue>
+          <resetMask>0xFFFFFFFF</resetMask>
           <fields>
             <field>
               <name>IM34</name>
-              <description>wakeup with interrupt mask on event input</description>
+              <description>Wake-up with interrupt mask on event input 34</description>
               <bitOffset>2</bitOffset>
               <bitWidth>1</bitWidth>
+              <access>read-write</access>
             </field>
             <field>
               <name>IM36</name>
-              <description>wakeup with interrupt mask on event input</description>
+              <description>Wake-up with interrupt mask on event input 36</description>
               <bitOffset>4</bitOffset>
               <bitWidth>1</bitWidth>
+              <access>read-write</access>
             </field>
             <field>
               <name>IM37</name>
-              <description>wakeup with interrupt mask on event input</description>
+              <description>Wake-up with interrupt mask on event input 37</description>
               <bitOffset>5</bitOffset>
               <bitWidth>1</bitWidth>
+              <access>read-write</access>
             </field>
             <field>
               <name>IM38</name>
-              <description>wakeup with interrupt mask on event input</description>
+              <description>Wake-up with interrupt mask on event input 38</description>
               <bitOffset>6</bitOffset>
               <bitWidth>1</bitWidth>
+              <access>read-write</access>
             </field>
             <field>
               <name>IM39</name>
-              <description>wakeup with interrupt mask on event input</description>
+              <description>Wake-up with interrupt mask on event input 39</description>
               <bitOffset>7</bitOffset>
               <bitWidth>1</bitWidth>
+              <access>read-write</access>
             </field>
             <field>
               <name>IM40</name>
-              <description>wakeup with interrupt mask on event input</description>
+              <description>Wake-up with interrupt mask on event input 40</description>
               <bitOffset>8</bitOffset>
               <bitWidth>1</bitWidth>
+              <access>read-write</access>
             </field>
             <field>
               <name>IM41</name>
-              <description>wakeup with interrupt mask on event input</description>
+              <description>Wake-up with interrupt mask on event input 41</description>
               <bitOffset>9</bitOffset>
               <bitWidth>1</bitWidth>
+              <access>read-write</access>
             </field>
             <field>
               <name>IM42</name>
-              <description>wakeup with interrupt mask on event input</description>
+              <description>Wake-up with interrupt mask on event input 42</description>
               <bitOffset>10</bitOffset>
               <bitWidth>1</bitWidth>
+              <access>read-write</access>
             </field>
             <field>
               <name>IM43</name>
-              <description>wakeup with interrupt mask on event input</description>
+              <description>Wake-up with interrupt mask on event input 43</description>
               <bitOffset>11</bitOffset>
               <bitWidth>1</bitWidth>
+              <access>read-write</access>
             </field>
             <field>
               <name>IM44</name>
-              <description>wakeup with interrupt mask on event input</description>
+              <description>Wake-up with interrupt mask on event input 44</description>
               <bitOffset>12</bitOffset>
               <bitWidth>1</bitWidth>
+              <access>read-write</access>
             </field>
             <field>
               <name>IM45</name>
-              <description>wakeup with interrupt mask on event input</description>
+              <description>Wake-up with interrupt mask on event input 45</description>
               <bitOffset>13</bitOffset>
               <bitWidth>1</bitWidth>
+              <access>read-write</access>
             </field>
             <field>
               <name>IM46</name>
-              <description>wakeup with interrupt mask on event input</description>
+              <description>Wake-up with interrupt mask on event input 46</description>
               <bitOffset>14</bitOffset>
               <bitWidth>1</bitWidth>
+              <access>read-write</access>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>B_0x0</name>
+                  <description>Wake-up with interrupt request from line 46 is masked.</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>B_0x1</name>
+                  <description>Wake-up with interrupt request from line 46 is unmasked.</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
             </field>
           </fields>
         </register>
         <register>
-          <name>C1EMR2</name>
-          <displayName>C1EMR2</displayName>
-          <description>wakeup with event mask           register</description>
-          <addressOffset>0x94</addressOffset>
+          <name>EXTI_C1EMR2</name>
+          <displayName>EXTI_C1EMR2</displayName>
+          <description>EXTI event mask register</description>
+          <addressOffset>0x094</addressOffset>
           <size>0x20</size>
           <access>read-write</access>
           <resetValue>0x00000000</resetValue>
+          <resetMask>0xFFFFFFFF</resetMask>
           <fields>
             <field>
               <name>EM40</name>
-              <description>Wakeup with event generation Mask               on Event input</description>
+              <description>Wake-up with event generation mask on event input 40</description>
               <bitOffset>8</bitOffset>
               <bitWidth>1</bitWidth>
+              <access>read-write</access>
             </field>
             <field>
               <name>EM41</name>
-              <description>Wakeup with event generation Mask               on Event input</description>
+              <description>Wake-up with event generation mask on event input 41</description>
               <bitOffset>9</bitOffset>
               <bitWidth>1</bitWidth>
+              <access>read-write</access>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>B_0x0</name>
+                  <description>Event request from line 41 is masked.</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>B_0x1</name>
+                  <description>Event request from line 41 is unmasked.</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
             </field>
           </fields>
         </register>
         <register>
-          <name>C2IMR1</name>
-          <displayName>C2IMR1</displayName>
-          <description>interrupt mask           register</description>
-          <addressOffset>0xC0</addressOffset>
+          <name>EXTI_C2IMR1</name>
+          <displayName>EXTI_C2IMR1</displayName>
+          <description>EXTI interrupt mask register</description>
+          <addressOffset>0x0C0</addressOffset>
           <size>0x20</size>
           <access>read-write</access>
           <resetValue>0x00000000</resetValue>
+          <resetMask>0xFFFFFFFF</resetMask>
           <fields>
             <field>
               <name>IM</name>
-              <description>wakeup with interrupt Mask on               Event input</description>
+              <description>Wake-up with interrupt mask on event input x
+For each bit of this field:</description>
               <bitOffset>0</bitOffset>
               <bitWidth>32</bitWidth>
+              <access>read-write</access>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>B_0x0</name>
+                  <description>Wake-up with interrupt request from line x is masked.</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>B_0x1</name>
+                  <description>Wake-up with Interrupt request from line x is unmasked.</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
             </field>
           </fields>
         </register>
         <register>
-          <name>C2EMR1</name>
-          <displayName>C2EMR1</displayName>
-          <description>event mask           register</description>
-          <addressOffset>0xC4</addressOffset>
+          <name>EXTI_C2EMR1</name>
+          <displayName>EXTI_C2EMR1</displayName>
+          <description>EXTI event mask register</description>
+          <addressOffset>0x0C4</addressOffset>
           <size>0x20</size>
           <access>read-write</access>
           <resetValue>0x00000000</resetValue>
+          <resetMask>0xFFFFFFFF</resetMask>
           <fields>
             <field>
               <name>EM0</name>
-              <description>Wakeup with event generation Mask               on Event input</description>
+              <description>Wake-up with event generation mask on event input 0</description>
               <bitOffset>0</bitOffset>
               <bitWidth>1</bitWidth>
+              <access>read-write</access>
             </field>
             <field>
               <name>EM1</name>
-              <description>Wakeup with event generation Mask               on Event input</description>
+              <description>Wake-up with event generation mask on event input 1</description>
               <bitOffset>1</bitOffset>
               <bitWidth>1</bitWidth>
+              <access>read-write</access>
             </field>
             <field>
               <name>EM2</name>
-              <description>Wakeup with event generation Mask               on Event input</description>
+              <description>Wake-up with event generation mask on event input 2</description>
               <bitOffset>2</bitOffset>
               <bitWidth>1</bitWidth>
+              <access>read-write</access>
             </field>
             <field>
               <name>EM3</name>
-              <description>Wakeup with event generation Mask               on Event input</description>
+              <description>Wake-up with event generation mask on event input 3</description>
               <bitOffset>3</bitOffset>
               <bitWidth>1</bitWidth>
+              <access>read-write</access>
             </field>
             <field>
               <name>EM4</name>
-              <description>Wakeup with event generation Mask               on Event input</description>
+              <description>Wake-up with event generation mask on event input 4</description>
               <bitOffset>4</bitOffset>
               <bitWidth>1</bitWidth>
+              <access>read-write</access>
             </field>
             <field>
               <name>EM5</name>
-              <description>Wakeup with event generation Mask               on Event input</description>
+              <description>Wake-up with event generation mask on event input 5</description>
               <bitOffset>5</bitOffset>
               <bitWidth>1</bitWidth>
+              <access>read-write</access>
             </field>
             <field>
               <name>EM6</name>
-              <description>Wakeup with event generation Mask               on Event input</description>
+              <description>Wake-up with event generation mask on event input 6</description>
               <bitOffset>6</bitOffset>
               <bitWidth>1</bitWidth>
+              <access>read-write</access>
             </field>
             <field>
               <name>EM7</name>
-              <description>Wakeup with event generation Mask               on Event input</description>
+              <description>Wake-up with event generation mask on event input 7</description>
               <bitOffset>7</bitOffset>
               <bitWidth>1</bitWidth>
+              <access>read-write</access>
             </field>
             <field>
               <name>EM8</name>
-              <description>Wakeup with event generation Mask               on Event input</description>
+              <description>Wake-up with event generation mask on event input 8</description>
               <bitOffset>8</bitOffset>
               <bitWidth>1</bitWidth>
+              <access>read-write</access>
             </field>
             <field>
               <name>EM9</name>
-              <description>Wakeup with event generation Mask               on Event input</description>
+              <description>Wake-up with event generation mask on event input 19</description>
               <bitOffset>9</bitOffset>
               <bitWidth>1</bitWidth>
+              <access>read-write</access>
             </field>
             <field>
               <name>EM10</name>
-              <description>Wakeup with event generation Mask               on Event input</description>
+              <description>Wake-up with event generation mask on event input 10</description>
               <bitOffset>10</bitOffset>
               <bitWidth>1</bitWidth>
+              <access>read-write</access>
             </field>
             <field>
               <name>EM11</name>
-              <description>Wakeup with event generation Mask               on Event input</description>
+              <description>Wake-up with event generation mask on event input 11</description>
               <bitOffset>11</bitOffset>
               <bitWidth>1</bitWidth>
+              <access>read-write</access>
             </field>
             <field>
               <name>EM12</name>
-              <description>Wakeup with event generation Mask               on Event input</description>
+              <description>Wake-up with event generation mask on event input 12</description>
               <bitOffset>12</bitOffset>
               <bitWidth>1</bitWidth>
+              <access>read-write</access>
             </field>
             <field>
               <name>EM13</name>
-              <description>Wakeup with event generation Mask               on Event input</description>
+              <description>Wake-up with event generation mask on event input 13</description>
               <bitOffset>13</bitOffset>
               <bitWidth>1</bitWidth>
+              <access>read-write</access>
             </field>
             <field>
               <name>EM14</name>
-              <description>Wakeup with event generation Mask               on Event input</description>
+              <description>Wake-up with event generation mask on event input 14</description>
               <bitOffset>14</bitOffset>
               <bitWidth>1</bitWidth>
+              <access>read-write</access>
             </field>
             <field>
               <name>EM15</name>
-              <description>Wakeup with event generation Mask               on Event input</description>
+              <description>Wake-up with event generation mask on event input 15</description>
               <bitOffset>15</bitOffset>
               <bitWidth>1</bitWidth>
+              <access>read-write</access>
             </field>
             <field>
               <name>EM17</name>
-              <description>Wakeup with event generation Mask               on Event input</description>
+              <description>Wake-up with event generation mask on event input 17</description>
               <bitOffset>17</bitOffset>
               <bitWidth>1</bitWidth>
+              <access>read-write</access>
             </field>
             <field>
               <name>EM18</name>
-              <description>Wakeup with event generation Mask               on Event input</description>
+              <description>Wake-up with event generation mask on event input 18</description>
               <bitOffset>18</bitOffset>
               <bitWidth>1</bitWidth>
+              <access>read-write</access>
             </field>
             <field>
               <name>EM19</name>
-              <description>Wakeup with event generation Mask               on Event input</description>
+              <description>Wake-up with event generation mask on event input 19</description>
               <bitOffset>19</bitOffset>
               <bitWidth>1</bitWidth>
+              <access>read-write</access>
             </field>
             <field>
               <name>EM20</name>
-              <description>Wakeup with event generation Mask               on Event input</description>
+              <description>Wake-up with event generation mask on event input 20</description>
               <bitOffset>20</bitOffset>
               <bitWidth>1</bitWidth>
+              <access>read-write</access>
             </field>
             <field>
               <name>EM21</name>
-              <description>Wakeup with event generation Mask               on Event input</description>
+              <description>Wake-up with event generation mask on event input 21</description>
               <bitOffset>21</bitOffset>
               <bitWidth>1</bitWidth>
+              <access>read-write</access>
             </field>
             <field>
               <name>EM22</name>
-              <description>Wakeup with event generation Mask               on Event input</description>
+              <description>Wake-up with event generation mask on event input 22</description>
               <bitOffset>22</bitOffset>
               <bitWidth>1</bitWidth>
+              <access>read-write</access>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>B_0x0</name>
+                  <description>Event request from line 22 is masked.</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>B_0x1</name>
+                  <description>Event request from line 22 is unmasked.</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
             </field>
           </fields>
         </register>
         <register>
-          <name>C2IMR2</name>
-          <displayName>C2IMR2</displayName>
-          <description>wakeup with interrupt mask           register</description>
-          <addressOffset>0xD0</addressOffset>
+          <name>EXTI_C2IMR2</name>
+          <displayName>EXTI_C2IMR2</displayName>
+          <description>EXTI interrupt mask register</description>
+          <addressOffset>0x0D0</addressOffset>
           <size>0x20</size>
           <access>read-write</access>
           <resetValue>0x00000000</resetValue>
+          <resetMask>0xFFFFFFFF</resetMask>
           <fields>
             <field>
               <name>IM34</name>
-              <description>wakeup with interrupt mask on event input</description>
+              <description>Wake-up with interrupt mask on event input 34</description>
               <bitOffset>2</bitOffset>
               <bitWidth>1</bitWidth>
+              <access>read-write</access>
             </field>
             <field>
               <name>IM36</name>
-              <description>wakeup with interrupt mask on event input</description>
+              <description>Wake-up with interrupt mask on event input 36</description>
               <bitOffset>4</bitOffset>
               <bitWidth>1</bitWidth>
+              <access>read-write</access>
             </field>
             <field>
               <name>IM37</name>
-              <description>wakeup with interrupt mask on event input</description>
+              <description>Wake-up with interrupt mask on event input 37</description>
               <bitOffset>5</bitOffset>
               <bitWidth>1</bitWidth>
+              <access>read-write</access>
             </field>
             <field>
               <name>IM38</name>
-              <description>wakeup with interrupt mask on event input</description>
+              <description>Wake-up with interrupt mask on event input 38</description>
               <bitOffset>6</bitOffset>
               <bitWidth>1</bitWidth>
+              <access>read-write</access>
             </field>
             <field>
               <name>IM39</name>
-              <description>wakeup with interrupt mask on event input</description>
+              <description>Wake-up with interrupt mask on event input 39</description>
               <bitOffset>7</bitOffset>
               <bitWidth>1</bitWidth>
+              <access>read-write</access>
             </field>
             <field>
               <name>IM40</name>
-              <description>wakeup with interrupt mask on event input</description>
+              <description>Wake-up with interrupt mask on event input 40</description>
               <bitOffset>8</bitOffset>
               <bitWidth>1</bitWidth>
+              <access>read-write</access>
             </field>
             <field>
               <name>IM41</name>
-              <description>wakeup with interrupt mask on event input</description>
+              <description>Wake-up with interrupt mask on event input 41</description>
               <bitOffset>9</bitOffset>
               <bitWidth>1</bitWidth>
+              <access>read-write</access>
             </field>
             <field>
               <name>IM42</name>
-              <description>wakeup with interrupt mask on event input</description>
+              <description>Wake-up with interrupt mask on event input 42</description>
               <bitOffset>10</bitOffset>
               <bitWidth>1</bitWidth>
+              <access>read-write</access>
             </field>
             <field>
               <name>IM43</name>
-              <description>wakeup with interrupt mask on event input</description>
+              <description>Wake-up with interrupt mask on event input 43</description>
               <bitOffset>11</bitOffset>
               <bitWidth>1</bitWidth>
+              <access>read-write</access>
             </field>
             <field>
               <name>IM44</name>
-              <description>wakeup with interrupt mask on event input</description>
+              <description>Wake-up with interrupt mask on event input 44</description>
               <bitOffset>12</bitOffset>
               <bitWidth>1</bitWidth>
+              <access>read-write</access>
             </field>
             <field>
               <name>IM45</name>
-              <description>wakeup with interrupt mask on event input</description>
+              <description>Wake-up with interrupt mask on event input 45</description>
               <bitOffset>13</bitOffset>
               <bitWidth>1</bitWidth>
+              <access>read-write</access>
             </field>
             <field>
               <name>IM46</name>
-              <description>wakeup with interrupt mask on event input</description>
+              <description>Wake-up with interrupt mask on event input 46</description>
               <bitOffset>14</bitOffset>
               <bitWidth>1</bitWidth>
+              <access>read-write</access>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>B_0x0</name>
+                  <description>Wake-up with interrupt request from line 46 is masked.</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>B_0x1</name>
+                  <description>Wake-up with interrupt request from line 46 is unmasked.</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
             </field>
           </fields>
         </register>
         <register>
-          <name>C2EMR2</name>
-          <displayName>C2EMR2</displayName>
-          <description>wakeup with event mask           register</description>
-          <addressOffset>0xD4</addressOffset>
+          <name>EXTI_C2EMR2</name>
+          <displayName>EXTI_C2EMR2</displayName>
+          <description>EXTI event mask register</description>
+          <addressOffset>0x0D4</addressOffset>
           <size>0x20</size>
           <access>read-write</access>
           <resetValue>0x00000000</resetValue>
+          <resetMask>0xFFFFFFFF</resetMask>
           <fields>
             <field>
               <name>EM40</name>
-              <description>Wakeup with event generation Mask               on Event input</description>
+              <description>Wake-up with event generation mask on event input 40</description>
               <bitOffset>8</bitOffset>
               <bitWidth>1</bitWidth>
+              <access>read-write</access>
             </field>
             <field>
               <name>EM41</name>
-              <description>Wakeup with event generation Mask               on Event input</description>
+              <description>Wake-up with event generation mask on event input 41</description>
               <bitOffset>9</bitOffset>
               <bitWidth>1</bitWidth>
+              <access>read-write</access>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>B_0x0</name>
+                  <description>Event request from line 41 is masked.</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>B_0x1</name>
+                  <description>Event request from line 41 is unmasked.</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
             </field>
           </fields>
         </register>
@@ -5779,10 +6203,10 @@ Copyright (c) 2020 STMicroelectronics.
         <usage>registers</usage>
       </addressBlock>
       <interrupt>
-        <name>FLASH</name>
+        <name>FLASH_RCC_C1SEV</name>
         <description>Flash memory global interrupt and Flash memory ECC
-          single error interrupt</description>
-        <value>4</value>
+        single error interrupt,RCC global interrupt,CPU1 SEV through EXTI</description>
+        <value>3</value>
       </interrupt>
       <registers>
         <register>
@@ -10205,8 +10629,8 @@ Copyright (c) 2020 STMicroelectronics.
       </addressBlock>
       <interrupt>
         <name>HSEM</name>
-        <description>Semaphore interrupt 0 to CPU1</description>
-        <value>47</value>
+        <description>Semaphore interrupt 1 to CPU2</description>
+        <value>19</value>
       </interrupt>
       <registers>
         <register>
@@ -12046,14 +12470,9 @@ Copyright (c) 2020 STMicroelectronics.
         <usage>registers</usage>
       </addressBlock>
       <interrupt>
-        <name>I2C1_EV</name>
-        <description>I2C1 event interrupt</description>
-        <value>30</value>
-      </interrupt>
-      <interrupt>
-        <name>I2C1_ER</name>
-        <description>I2C1 event interrupt</description>
-        <value>31</value>
+        <name>I2C1_EV_I2C1_ER</name>
+        <description>I2C1 event interrupt,I2C1 error interrupt</description>
+        <value>22</value>
       </interrupt>
       <registers>
         <register>
@@ -12655,28 +13074,18 @@ Copyright (c) 2020 STMicroelectronics.
       <name>I2C2</name>
       <baseAddress>0x40005800</baseAddress>
       <interrupt>
-        <name>I2C2_EV</name>
-        <description>I2C2 event interrupt</description>
-        <value>32</value>
-      </interrupt>
-      <interrupt>
-        <name>I2C2_ER</name>
-        <description>I2C2 error interrupt</description>
-        <value>33</value>
+        <name>I2C2_EV_I2C2_ER</name>
+        <description>I2C2 event interrupt , I2C2 error interrupt</description>
+        <value>23</value>
       </interrupt>
     </peripheral>
     <peripheral derivedFrom="I2C1">
       <name>I2C3</name>
       <baseAddress>0x40005C00</baseAddress>
       <interrupt>
-        <name>I2C3_EV</name>
-        <description>I2C3 event interrupt</description>
-        <value>48</value>
-      </interrupt>
-      <interrupt>
-        <name>I2C3_ER</name>
-        <description>I2C3 error interrupt</description>
-        <value>49</value>
+        <name>I2C3_EV_I2C3_ER</name>
+        <description>I2C3 event interrupt , I2C2 error interrupt</description>
+        <value>24</value>
       </interrupt>
     </peripheral>
     <peripheral>
@@ -12690,19 +13099,14 @@ Copyright (c) 2020 STMicroelectronics.
         <usage>registers</usage>
       </addressBlock>
       <interrupt>
-        <name>IPCC_C1_RX_IT</name>
-        <description>IPCC CPU1 RX occupied interrupt</description>
-        <value>45</value>
-      </interrupt>
-      <interrupt>
-        <name>IPCC_C1_TX_IT</name>
-        <description>IPCC CPU1 TX free interrupt</description>
-        <value>46</value>
+        <name>IPCC_C2_RX_IT_IPCC_C2_TX_IT</name>
+        <description>IPCC CPU2 RX occupied interrupt, IPCC CPU2 TX free interrupt</description>
+        <value>18</value>
       </interrupt>
       <registers>
         <register>
-          <name>C1CR</name>
-          <displayName>C1CR</displayName>
+          <name>IPCC_C1CR</name>
+          <displayName>IPCC_C1CR</displayName>
           <description>IPCC Processor 1 control           register</description>
           <addressOffset>0x0</addressOffset>
           <size>0x20</size>
@@ -12724,8 +13128,8 @@ Copyright (c) 2020 STMicroelectronics.
           </fields>
         </register>
         <register>
-          <name>C1MR</name>
-          <displayName>C1MR</displayName>
+          <name>IPCC_C1MR</name>
+          <displayName>IPCC_C1MR</displayName>
           <description>IPCC Processor 1 mask register</description>
           <addressOffset>0x4</addressOffset>
           <size>0x20</size>
@@ -12807,8 +13211,8 @@ Copyright (c) 2020 STMicroelectronics.
           </fields>
         </register>
         <register>
-          <name>C1SCR</name>
-          <displayName>C1SCR</displayName>
+          <name>IPCC_C1SCR</name>
+          <displayName>IPCC_C1SCR</displayName>
           <description>Reading this register will always return           0x0000 0000.</description>
           <addressOffset>0x8</addressOffset>
           <size>0x20</size>
@@ -12890,8 +13294,8 @@ Copyright (c) 2020 STMicroelectronics.
           </fields>
         </register>
         <register>
-          <name>IC1TOC2SR</name>
-          <displayName>IC1TOC2SR</displayName>
+          <name>IPCC_C1TOC2SR</name>
+          <displayName>IPCC_C1TOC2SR</displayName>
           <description>IPCC processor 1 to processor 2 status           register</description>
           <addressOffset>0xC</addressOffset>
           <size>0x20</size>
@@ -12937,8 +13341,8 @@ Copyright (c) 2020 STMicroelectronics.
           </fields>
         </register>
         <register>
-          <name>C2CR</name>
-          <displayName>C2CR</displayName>
+          <name>IPCC_C2CR</name>
+          <displayName>IPCC_C2CR</displayName>
           <description>IPCC Processor 2 control           register</description>
           <addressOffset>0x10</addressOffset>
           <size>0x20</size>
@@ -12960,8 +13364,8 @@ Copyright (c) 2020 STMicroelectronics.
           </fields>
         </register>
         <register>
-          <name>C2MR</name>
-          <displayName>C2MR</displayName>
+          <name>IPCC_C2MR</name>
+          <displayName>IPCC_C2MR</displayName>
           <description>IPCC Processor 2 mask register</description>
           <addressOffset>0x14</addressOffset>
           <size>0x20</size>
@@ -13043,8 +13447,8 @@ Copyright (c) 2020 STMicroelectronics.
           </fields>
         </register>
         <register>
-          <name>C2SCR</name>
-          <displayName>C2SCR</displayName>
+          <name>IPCC_C2SCR</name>
+          <displayName>IPCC_C2SCR</displayName>
           <description>Reading this register will always return           0x0000 0000.</description>
           <addressOffset>0x18</addressOffset>
           <size>0x20</size>
@@ -13126,8 +13530,8 @@ Copyright (c) 2020 STMicroelectronics.
           </fields>
         </register>
         <register>
-          <name>C2TOC1SR</name>
-          <displayName>C2TOC1SR</displayName>
+          <name>IPCC_C2TOC1SR</name>
+          <displayName>IPCC_C2TOC1SR</displayName>
           <description>IPCC processor 2 to processor 1 status           register</description>
           <addressOffset>0x1C</addressOffset>
           <size>0x20</size>
@@ -13173,8 +13577,8 @@ Copyright (c) 2020 STMicroelectronics.
           </fields>
         </register>
         <register>
-          <name>HWCFGR</name>
-          <displayName>HWCFGR</displayName>
+          <name>IPCC_HWCFGR</name>
+          <displayName>IPCC_HWCFGR</displayName>
           <description>IPCC Hardware configuration           register</description>
           <addressOffset>0x3F0</addressOffset>
           <size>0x20</size>
@@ -13190,8 +13594,8 @@ Copyright (c) 2020 STMicroelectronics.
           </fields>
         </register>
         <register>
-          <name>VERR</name>
-          <displayName>VERR</displayName>
+          <name>IPCC_VERR</name>
+          <displayName>IPCC_VERR</displayName>
           <description>IPCC IP Version register</description>
           <addressOffset>0x3F4</addressOffset>
           <size>0x20</size>
@@ -13213,8 +13617,8 @@ Copyright (c) 2020 STMicroelectronics.
           </fields>
         </register>
         <register>
-          <name>IPIDR</name>
-          <displayName>IPIDR</displayName>
+          <name>IPCC_IPIDR</name>
+          <displayName>IPCC_IPIDR</displayName>
           <description>IPCC IP Identification           register</description>
           <addressOffset>0x3F8</addressOffset>
           <size>0x20</size>
@@ -13230,8 +13634,8 @@ Copyright (c) 2020 STMicroelectronics.
           </fields>
         </register>
         <register>
-          <name>SIDR</name>
-          <displayName>SIDR</displayName>
+          <name>IPCC_SIDR</name>
+          <displayName>IPCC_SIDR</displayName>
           <description>IPCC Size ID register</description>
           <addressOffset>0x3FC</addressOffset>
           <size>0x20</size>
@@ -13371,7 +13775,7 @@ Copyright (c) 2020 STMicroelectronics.
       <interrupt>
         <name>LPTIM1</name>
         <description>LPtimer 1 global interrupt</description>
-        <value>39</value>
+        <value>11</value>
       </interrupt>
       <registers>
         <register>
@@ -13805,7 +14209,7 @@ Copyright (c) 2020 STMicroelectronics.
       <interrupt>
         <name>LPTIM2</name>
         <description>LPtimer 2 global interrupt</description>
-        <value>40</value>
+        <value>12</value>
       </interrupt>
       <registers>
         <register>
@@ -14239,7 +14643,7 @@ Copyright (c) 2020 STMicroelectronics.
       <interrupt>
         <name>LPTIM3</name>
         <description>LPtimer 3 global interrupt</description>
-        <value>43</value>
+        <value>13</value>
       </interrupt>
       <registers>
         <register>
@@ -14673,7 +15077,7 @@ Copyright (c) 2020 STMicroelectronics.
       <interrupt>
         <name>LPUART1</name>
         <description>LPUART1 global interrupt</description>
-        <value>38</value>
+        <value>29</value>
       </interrupt>
       <registers>
         <register>
@@ -15745,44 +16149,10 @@ Copyright (c) 2020 STMicroelectronics.
           </fields>
         </register>
         <register>
-          <name>ISER1</name>
-          <displayName>ISER1</displayName>
-          <description>Interrupt Set-Enable Register</description>
-          <addressOffset>0x4</addressOffset>
-          <size>0x20</size>
-          <access>read-write</access>
-          <resetValue>0x00000000</resetValue>
-          <fields>
-            <field>
-              <name>SETENA</name>
-              <description>SETENA</description>
-              <bitOffset>0</bitOffset>
-              <bitWidth>32</bitWidth>
-            </field>
-          </fields>
-        </register>
-        <register>
           <name>ICER0</name>
           <displayName>ICER0</displayName>
           <description>Interrupt Clear-Enable           Register</description>
           <addressOffset>0x80</addressOffset>
-          <size>0x20</size>
-          <access>read-write</access>
-          <resetValue>0x00000000</resetValue>
-          <fields>
-            <field>
-              <name>CLRENA</name>
-              <description>CLRENA</description>
-              <bitOffset>0</bitOffset>
-              <bitWidth>32</bitWidth>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>ICER1</name>
-          <displayName>ICER1</displayName>
-          <description>Interrupt Clear-Enable           Register</description>
-          <addressOffset>0x84</addressOffset>
           <size>0x20</size>
           <access>read-write</access>
           <resetValue>0x00000000</resetValue>
@@ -15813,44 +16183,10 @@ Copyright (c) 2020 STMicroelectronics.
           </fields>
         </register>
         <register>
-          <name>ISPR1</name>
-          <displayName>ISPR1</displayName>
-          <description>Interrupt Set-Pending Register</description>
-          <addressOffset>0x104</addressOffset>
-          <size>0x20</size>
-          <access>read-write</access>
-          <resetValue>0x00000000</resetValue>
-          <fields>
-            <field>
-              <name>SETPEND</name>
-              <description>SETPEND</description>
-              <bitOffset>0</bitOffset>
-              <bitWidth>32</bitWidth>
-            </field>
-          </fields>
-        </register>
-        <register>
           <name>ICPR0</name>
           <displayName>ICPR0</displayName>
           <description>Interrupt Clear-Pending           Register</description>
           <addressOffset>0x180</addressOffset>
-          <size>0x20</size>
-          <access>read-write</access>
-          <resetValue>0x00000000</resetValue>
-          <fields>
-            <field>
-              <name>CLRPEND</name>
-              <description>CLRPEND</description>
-              <bitOffset>0</bitOffset>
-              <bitWidth>32</bitWidth>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>ICPR1</name>
-          <displayName>ICPR1</displayName>
-          <description>Interrupt Clear-Pending           Register</description>
-          <addressOffset>0x184</addressOffset>
           <size>0x20</size>
           <access>read-write</access>
           <resetValue>0x00000000</resetValue>
@@ -16212,321 +16548,6 @@ Copyright (c) 2020 STMicroelectronics.
             </field>
           </fields>
         </register>
-        <register>
-          <name>IPR9</name>
-          <displayName>IPR9</displayName>
-          <description>Interrupt Priority Register</description>
-          <addressOffset>0x324</addressOffset>
-          <size>0x20</size>
-          <access>read-write</access>
-          <resetValue>0x00000000</resetValue>
-          <fields>
-            <field>
-              <name>IPR_N0</name>
-              <description>IPR_N0</description>
-              <bitOffset>0</bitOffset>
-              <bitWidth>8</bitWidth>
-            </field>
-            <field>
-              <name>IPR_N1</name>
-              <description>IPR_N1</description>
-              <bitOffset>8</bitOffset>
-              <bitWidth>8</bitWidth>
-            </field>
-            <field>
-              <name>IPR_N2</name>
-              <description>IPR_N2</description>
-              <bitOffset>16</bitOffset>
-              <bitWidth>8</bitWidth>
-            </field>
-            <field>
-              <name>IPR_N3</name>
-              <description>IPR_N3</description>
-              <bitOffset>24</bitOffset>
-              <bitWidth>8</bitWidth>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>IPR10</name>
-          <displayName>IPR10</displayName>
-          <description>Interrupt Priority Register</description>
-          <addressOffset>0x328</addressOffset>
-          <size>0x20</size>
-          <access>read-write</access>
-          <resetValue>0x00000000</resetValue>
-          <fields>
-            <field>
-              <name>IPR_N0</name>
-              <description>IPR_N0</description>
-              <bitOffset>0</bitOffset>
-              <bitWidth>8</bitWidth>
-            </field>
-            <field>
-              <name>IPR_N1</name>
-              <description>IPR_N1</description>
-              <bitOffset>8</bitOffset>
-              <bitWidth>8</bitWidth>
-            </field>
-            <field>
-              <name>IPR_N2</name>
-              <description>IPR_N2</description>
-              <bitOffset>16</bitOffset>
-              <bitWidth>8</bitWidth>
-            </field>
-            <field>
-              <name>IPR_N3</name>
-              <description>IPR_N3</description>
-              <bitOffset>24</bitOffset>
-              <bitWidth>8</bitWidth>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>IPR11</name>
-          <displayName>IPR11</displayName>
-          <description>Interrupt Priority Register</description>
-          <addressOffset>0x32C</addressOffset>
-          <size>0x20</size>
-          <access>read-write</access>
-          <resetValue>0x00000000</resetValue>
-          <fields>
-            <field>
-              <name>IPR_N0</name>
-              <description>IPR_N0</description>
-              <bitOffset>0</bitOffset>
-              <bitWidth>8</bitWidth>
-            </field>
-            <field>
-              <name>IPR_N1</name>
-              <description>IPR_N1</description>
-              <bitOffset>8</bitOffset>
-              <bitWidth>8</bitWidth>
-            </field>
-            <field>
-              <name>IPR_N2</name>
-              <description>IPR_N2</description>
-              <bitOffset>16</bitOffset>
-              <bitWidth>8</bitWidth>
-            </field>
-            <field>
-              <name>IPR_N3</name>
-              <description>IPR_N3</description>
-              <bitOffset>24</bitOffset>
-              <bitWidth>8</bitWidth>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>IPR12</name>
-          <displayName>IPR12</displayName>
-          <description>Interrupt Priority Register</description>
-          <addressOffset>0x330</addressOffset>
-          <size>0x20</size>
-          <access>read-write</access>
-          <resetValue>0x00000000</resetValue>
-          <fields>
-            <field>
-              <name>IPR_N0</name>
-              <description>IPR_N0</description>
-              <bitOffset>0</bitOffset>
-              <bitWidth>8</bitWidth>
-            </field>
-            <field>
-              <name>IPR_N1</name>
-              <description>IPR_N1</description>
-              <bitOffset>8</bitOffset>
-              <bitWidth>8</bitWidth>
-            </field>
-            <field>
-              <name>IPR_N2</name>
-              <description>IPR_N2</description>
-              <bitOffset>16</bitOffset>
-              <bitWidth>8</bitWidth>
-            </field>
-            <field>
-              <name>IPR_N3</name>
-              <description>IPR_N3</description>
-              <bitOffset>24</bitOffset>
-              <bitWidth>8</bitWidth>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>IPR13</name>
-          <displayName>IPR13</displayName>
-          <description>Interrupt Priority Register</description>
-          <addressOffset>0x334</addressOffset>
-          <size>0x20</size>
-          <access>read-write</access>
-          <resetValue>0x00000000</resetValue>
-          <fields>
-            <field>
-              <name>IPR_N0</name>
-              <description>IPR_N0</description>
-              <bitOffset>0</bitOffset>
-              <bitWidth>8</bitWidth>
-            </field>
-            <field>
-              <name>IPR_N1</name>
-              <description>IPR_N1</description>
-              <bitOffset>8</bitOffset>
-              <bitWidth>8</bitWidth>
-            </field>
-            <field>
-              <name>IPR_N2</name>
-              <description>IPR_N2</description>
-              <bitOffset>16</bitOffset>
-              <bitWidth>8</bitWidth>
-            </field>
-            <field>
-              <name>IPR_N3</name>
-              <description>IPR_N3</description>
-              <bitOffset>24</bitOffset>
-              <bitWidth>8</bitWidth>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>IPR14</name>
-          <displayName>IPR14</displayName>
-          <description>Interrupt Priority Register</description>
-          <addressOffset>0x338</addressOffset>
-          <size>0x20</size>
-          <access>read-write</access>
-          <resetValue>0x00000000</resetValue>
-          <fields>
-            <field>
-              <name>IPR_N0</name>
-              <description>IPR_N0</description>
-              <bitOffset>0</bitOffset>
-              <bitWidth>8</bitWidth>
-            </field>
-            <field>
-              <name>IPR_N1</name>
-              <description>IPR_N1</description>
-              <bitOffset>8</bitOffset>
-              <bitWidth>8</bitWidth>
-            </field>
-            <field>
-              <name>IPR_N2</name>
-              <description>IPR_N2</description>
-              <bitOffset>16</bitOffset>
-              <bitWidth>8</bitWidth>
-            </field>
-            <field>
-              <name>IPR_N3</name>
-              <description>IPR_N3</description>
-              <bitOffset>24</bitOffset>
-              <bitWidth>8</bitWidth>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>IPR15</name>
-          <displayName>IPR15</displayName>
-          <description>Interrupt Priority Register</description>
-          <addressOffset>0x33C</addressOffset>
-          <size>0x20</size>
-          <access>read-write</access>
-          <resetValue>0x00000000</resetValue>
-          <fields>
-            <field>
-              <name>IPR_N0</name>
-              <description>IPR_N0</description>
-              <bitOffset>0</bitOffset>
-              <bitWidth>8</bitWidth>
-            </field>
-            <field>
-              <name>IPR_N1</name>
-              <description>IPR_N1</description>
-              <bitOffset>8</bitOffset>
-              <bitWidth>8</bitWidth>
-            </field>
-            <field>
-              <name>IPR_N2</name>
-              <description>IPR_N2</description>
-              <bitOffset>16</bitOffset>
-              <bitWidth>8</bitWidth>
-            </field>
-            <field>
-              <name>IPR_N3</name>
-              <description>IPR_N3</description>
-              <bitOffset>24</bitOffset>
-              <bitWidth>8</bitWidth>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>IPR16</name>
-          <displayName>IPR16</displayName>
-          <description>Interrupt Priority Register</description>
-          <addressOffset>0x340</addressOffset>
-          <size>0x20</size>
-          <access>read-write</access>
-          <resetValue>0x00000000</resetValue>
-          <fields>
-            <field>
-              <name>IPR_N0</name>
-              <description>IPR_N0</description>
-              <bitOffset>0</bitOffset>
-              <bitWidth>8</bitWidth>
-            </field>
-            <field>
-              <name>IPR_N1</name>
-              <description>IPR_N1</description>
-              <bitOffset>8</bitOffset>
-              <bitWidth>8</bitWidth>
-            </field>
-            <field>
-              <name>IPR_N2</name>
-              <description>IPR_N2</description>
-              <bitOffset>16</bitOffset>
-              <bitWidth>8</bitWidth>
-            </field>
-            <field>
-              <name>IPR_N3</name>
-              <description>IPR_N3</description>
-              <bitOffset>24</bitOffset>
-              <bitWidth>8</bitWidth>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>IPR17</name>
-          <displayName>IPR17</displayName>
-          <description>Interrupt Priority Register</description>
-          <addressOffset>0x344</addressOffset>
-          <size>0x20</size>
-          <access>read-write</access>
-          <resetValue>0x00000000</resetValue>
-          <fields>
-            <field>
-              <name>IPR_N0</name>
-              <description>IPR_N0</description>
-              <bitOffset>0</bitOffset>
-              <bitWidth>8</bitWidth>
-            </field>
-            <field>
-              <name>IPR_N1</name>
-              <description>IPR_N1</description>
-              <bitOffset>8</bitOffset>
-              <bitWidth>8</bitWidth>
-            </field>
-            <field>
-              <name>IPR_N2</name>
-              <description>IPR_N2</description>
-              <bitOffset>16</bitOffset>
-              <bitWidth>8</bitWidth>
-            </field>
-            <field>
-              <name>IPR_N3</name>
-              <description>IPR_N3</description>
-              <bitOffset>24</bitOffset>
-              <bitWidth>8</bitWidth>
-            </field>
-          </fields>
-        </register>
       </registers>
     </peripheral>
     <peripheral>
@@ -16569,12 +16590,6 @@ Copyright (c) 2020 STMicroelectronics.
         <size>0x2000</size>
         <usage>registers</usage>
       </addressBlock>
-      <interrupt>
-        <name>PKA</name>
-        <description>Private key accelerator
-        interrupt</description>
-        <value>53</value>
-      </interrupt>
       <registers>
         <register>
           <name>CR</name>
@@ -16699,11 +16714,6 @@ Copyright (c) 2020 STMicroelectronics.
         <size>0x400</size>
         <usage>registers</usage>
       </addressBlock>
-      <interrupt>
-        <name>PWR_C2H_C2SEV</name>
-        <description>PWR CPU2 HOLD wakeup interrupt ,CPU2 SEV through EXTI</description>
-        <value>20</value>
-      </interrupt>
       <registers>
         <register>
           <name>CR1</name>
@@ -17964,11 +17974,6 @@ Copyright (c) 2020 STMicroelectronics.
         <size>0x400</size>
         <usage>registers</usage>
       </addressBlock>
-      <interrupt>
-        <name>RCC</name>
-        <description>RCC global interrupt</description>
-        <value>5</value>
-      </interrupt>
       <registers>
         <register>
           <name>CR</name>
@@ -20203,7 +20208,7 @@ Copyright (c) 2020 STMicroelectronics.
         <name>True_RNG</name>
         <description>True random number generator
         interrupt</description>
-        <value>52</value>
+        <value>20</value>
       </interrupt>
       <registers>
         <register>
@@ -20369,19 +20374,9 @@ Copyright (c) 2020 STMicroelectronics.
         <usage>registers</usage>
       </addressBlock>
       <interrupt>
-        <name>TAMP_RTCSTAMP_LSECSS_RTCSSRU</name>
-        <description>Tamper, TimeStamp, LSECSS,RTC_SSRU interrupt</description>
+        <name>TAMP_RTCSTAMP_LSECSS_RTCALARM_RTCSSRU_RTCWKUP</name>
+        <description>Tamper, TimeStamp, LSECSS,alarm A and B,SSR underflow,RTC wakeup interrupt</description>
         <value>2</value>
-      </interrupt>
-      <interrupt>
-        <name>RTC_WKUP</name>
-        <description>RTC wakeup interrupt</description>
-        <value>3</value>
-      </interrupt>
-      <interrupt>
-        <name>RTC_ALARM</name>
-        <description>RTC alarms A and B interrupt</description>
-        <value>42</value>
       </interrupt>
       <registers>
         <register>
@@ -22149,7 +22144,7 @@ Copyright (c) 2020 STMicroelectronics.
       <interrupt>
         <name>SPI1</name>
         <description>SPI 1 global interrupt</description>
-        <value>34</value>
+        <value>25</value>
       </interrupt>
       <registers>
         <register>
@@ -22587,7 +22582,7 @@ Copyright (c) 2020 STMicroelectronics.
       <interrupt>
         <name>SPI2S2</name>
         <description>SPI2S2 global interrupt</description>
-        <value>35</value>
+        <value>26</value>
       </interrupt>
     </peripheral>
     <peripheral derivedFrom="SPI1">
@@ -22596,7 +22591,7 @@ Copyright (c) 2020 STMicroelectronics.
       <interrupt>
         <name>SUBGHZSPI</name>
         <description>Sub-GHz radio SPI global interrupt</description>
-        <value>44</value>
+        <value>30</value>
       </interrupt>
     </peripheral>
     <peripheral>
@@ -23957,103 +23952,103 @@ Copyright (c) 2020 STMicroelectronics.
           <fields>
             <field>
               <name>PVDIM</name>
-              <description>Peripheral PVD interrupt mask to CPU2</description>
+              <description>Peripheral PVD interrupt mask to               CPU2</description>
               <bitOffset>20</bitOffset>
               <bitWidth>1</bitWidth>
             </field>
             <field>
               <name>PVM3IM</name>
-              <description>Peripheral PVM3 interrupt mask to   CPU2</description>
+              <description>Peripheral PVM3 interrupt mask to               CPU2</description>
               <bitOffset>18</bitOffset>
               <bitWidth>1</bitWidth>
             </field>
             <field>
               <name>DMAMUX1IM</name>
-              <description>Peripheral DMAMUX1 interrupt mask to   CPU2</description>
+              <description>Peripheral DMAMUX1 interrupt mask to               CPU2</description>
               <bitOffset>15</bitOffset>
               <bitWidth>1</bitWidth>
             </field>
             <field>
               <name>DMA2CH7IM</name>
-              <description>Peripheral DMA2CH7 interrupt mask to   CPU2</description>
+              <description>Peripheral DMA2CH7 interrupt mask to               CPU2</description>
               <bitOffset>14</bitOffset>
               <bitWidth>1</bitWidth>
             </field>
             <field>
               <name>DMA2CH6IM</name>
-              <description>Peripheral DMA2CH6 interrupt mask to     CPU2</description>
+              <description>Peripheral DMA2CH6 interrupt mask to               CPU2</description>
               <bitOffset>13</bitOffset>
               <bitWidth>1</bitWidth>
             </field>
             <field>
               <name>DMA2CH5IM</name>
-              <description>Peripheral DMA2CH5 interrupt mask to  CPU2</description>
+              <description>Peripheral DMA2CH5 interrupt mask to               CPU2</description>
               <bitOffset>12</bitOffset>
               <bitWidth>1</bitWidth>
             </field>
             <field>
               <name>DMA2CH4IM</name>
-              <description>Peripheral DMA2CH4 interrupt mask to   CPU2</description>
+              <description>Peripheral DMA2CH4 interrupt mask to               CPU2</description>
               <bitOffset>11</bitOffset>
               <bitWidth>1</bitWidth>
             </field>
             <field>
               <name>DMA2CH3IM</name>
-              <description>Peripheral DMA2CH3 interrupt mask to CPU2</description>
+              <description>Peripheral DMA2CH3 interrupt mask to               CPU2</description>
               <bitOffset>10</bitOffset>
               <bitWidth>1</bitWidth>
             </field>
             <field>
               <name>DMA2CH2IM</name>
-              <description>Peripheral DMA2CH2 interrupt mask to    CPU2</description>
+              <description>Peripheral DMA2CH2 interrupt mask to               CPU2</description>
               <bitOffset>9</bitOffset>
               <bitWidth>1</bitWidth>
             </field>
             <field>
               <name>DMA2CH1IM</name>
-              <description>Peripheral DMA2CH1 interrupt mask to  CPU2</description>
+              <description>Peripheral DMA2CH1 interrupt mask to               CPU2</description>
               <bitOffset>8</bitOffset>
               <bitWidth>1</bitWidth>
             </field>
             <field>
               <name>DMA1CH7IM</name>
-              <description>Peripheral DMA1CH7 interrupt mask to  CPU2</description>
+              <description>Peripheral DMA1CH7 interrupt mask to               CPU2</description>
               <bitOffset>6</bitOffset>
               <bitWidth>1</bitWidth>
             </field>
             <field>
               <name>DMA1CH6IM</name>
-              <description>Peripheral DMA1CH6 interrupt mask to    CPU2</description>
+              <description>Peripheral DMA1CH6 interrupt mask to               CPU2</description>
               <bitOffset>5</bitOffset>
               <bitWidth>1</bitWidth>
             </field>
             <field>
               <name>DMA1CH5IM</name>
-              <description>Peripheral DMA1CH5 interrupt mask to CPU2</description>
+              <description>Peripheral DMA1CH5 interrupt mask to               CPU2</description>
               <bitOffset>4</bitOffset>
               <bitWidth>1</bitWidth>
             </field>
             <field>
               <name>DMA1CH4IM</name>
-              <description>Peripheral DMA1CH4 interrupt mask to  CPU2</description>
+              <description>Peripheral DMA1CH4 interrupt mask to               CPU2</description>
               <bitOffset>3</bitOffset>
               <bitWidth>1</bitWidth>
             </field>
             <field>
               <name>DMA1CH3IM</name>
-              <description>Peripheral DMA1CH3 interrupt mask to   CPU2</description>
+              <description>Peripheral DMA1CH3 interrupt mask to               CPU2</description>
               <bitOffset>2</bitOffset>
               <bitWidth>1</bitWidth>
             </field>
             <field>
               <name>DMA1CH2IM</name>
-              <description>Peripheral DMA1CH2 interrupt mask to   CPU2</description>
+              <description>Peripheral DMA1CH2 interrupt mask to               CPU2</description>
               <bitOffset>1</bitOffset>
               <bitWidth>1</bitWidth>
             </field>
             <field>
               <name>DMA1CH1IM</name>
-              <description>Peripheral DMA1CH1 interrupt mask to CPU2</description>
+              <description>Peripheral DMA1CH1 interrupt mask to               CPU2</description>
               <bitOffset>0</bitOffset>
               <bitWidth>1</bitWidth>
             </field>
@@ -24848,24 +24843,10 @@ Copyright (c) 2020 STMicroelectronics.
         <usage>registers</usage>
       </addressBlock>
       <interrupt>
-        <name>TIM1_BRK</name>
-        <description>Timer 1 break interrupt</description>
-        <value>23</value>
-      </interrupt>
-      <interrupt>
-        <name>TIM1_UP</name>
-        <description>Timer 1 Update</description>
-        <value>24</value>
-      </interrupt>
-      <interrupt>
-        <name>TIM1_TRG_COM</name>
-        <description>Timer 1 trigger and communication</description>
-        <value>25</value>
-      </interrupt>
-      <interrupt>
-        <name>TIM1_CC</name>
-        <description>Timer 1 capture compare interrupt</description>
-        <value>26</value>
+        <name>TIM1_BRK_TIM1_UP_TIM1_TRG_COM_TIM1_CC</name>
+        <description>Timer 1 break, update, trigger and
+        communication,capture compare interrupt</description>
+        <value>14</value>
       </interrupt>
       <registers>
         <register>
@@ -26345,7 +26326,7 @@ Copyright (c) 2020 STMicroelectronics.
       <interrupt>
         <name>TIM2</name>
         <description>Timer 2 global interrupt</description>
-        <value>27</value>
+        <value>15</value>
       </interrupt>
       <registers>
         <register>
@@ -27320,7 +27301,7 @@ Copyright (c) 2020 STMicroelectronics.
       <interrupt>
         <name>TIM16</name>
         <description>Timer 16 global interrupt</description>
-        <value>28</value>
+        <value>16</value>
       </interrupt>
       <registers>
         <register>
@@ -27957,7 +27938,7 @@ Copyright (c) 2020 STMicroelectronics.
       <interrupt>
         <name>TIM17</name>
         <description>Timer 17 global interrupt</description>
-        <value>29</value>
+        <value>17</value>
       </interrupt>
       <registers>
         <register>
@@ -28591,6 +28572,12 @@ Copyright (c) 2020 STMicroelectronics.
         <size>0x400</size>
         <usage>registers</usage>
       </addressBlock>
+      <interrupt>
+        <name>TZIC_ILA</name>
+        <description>Security Interrupt controller illegal access
+        interrupt</description>
+        <value>0</value>
+      </interrupt>
       <registers>
         <register>
           <name>IER1</name>
@@ -29054,7 +29041,7 @@ Copyright (c) 2020 STMicroelectronics.
       <interrupt>
         <name>USART1</name>
         <description>USART1 global interrupt</description>
-        <value>36</value>
+        <value>27</value>
       </interrupt>
       <registers>
         <register>
@@ -30001,7 +29988,7 @@ Copyright (c) 2020 STMicroelectronics.
       <interrupt>
         <name>USART2</name>
         <description>USART2 global interrupt</description>
-        <value>37</value>
+        <value>28</value>
       </interrupt>
     </peripheral>
     <peripheral>
@@ -30082,11 +30069,6 @@ Copyright (c) 2020 STMicroelectronics.
         <size>0x400</size>
         <usage>registers</usage>
       </addressBlock>
-      <interrupt>
-        <name>WWDG</name>
-        <description>Window watchdog early wakeup interrupt</description>
-        <value>0</value>
-      </interrupt>
       <registers>
         <register>
           <name>CR</name>
