@@ -23,6 +23,7 @@ volatile uint8_t *cpu2InitDone = (uint8_t *)0x2000FFFF;
 volatile uint32_t *cycle_count = (uint32_t *)0x2000FFF0;
 
 #if defined(CORE_CM0PLUS)
+volatile bool stall_program = false;    // set to true when you want to debug M0+ core
 static uint32_t min_cycles;
 #endif
 
@@ -72,6 +73,10 @@ int main(void)
   uint32_t new_cycle = get_cycle_count();
   min_cycles = new_cycle-curr_cycle;
   printfln_("min cycles is %u", new_cycle-curr_cycle);
+  while(stall_program){
+    __NOP();
+  }
+  __NOP();
   run_test();
 #endif
 
@@ -130,12 +135,12 @@ static void run_test(void)
   RUN_TESTp(memmove_test, 50, 0x81, 0x102, true);
 
   RUN_TESTp(memmove_slide_dest, 0x0f, 0x81);
-  RUN_TESTp(memmove_slide_dest, 0x10, 0x80);
+  RUN_TESTp(memmove_slide_dest, 0x15, 0x80);
   RUN_TESTp(memmove_slide_dest, 0x22, 0x17f);
   RUN_TESTp(memmove_slide_dest, 0x200, 0x400);
+  RUN_TESTp(memmove_slide_dest, 0x201, 0x400);
 
-  RUN_TEST1(memmove_iterate, 20);
-
+  RUN_TEST1(memmove_iterate, 35);
 
   GREATEST_MAIN_END();    // display results
 }
@@ -157,10 +162,13 @@ TEST memmove_test(uint32_t data_len, uint32_t src_offset, uint32_t dest_offset, 
     expected[src_offset + i] = i;
     actual[src_offset + i] = i;
   }
+
+  memmove(&(expected[dest_offset]), &(expected[src_offset]), data_len);
   uint32_t memmove_orig_start = get_cycle_count();
   memmove(&(expected[dest_offset]), &(expected[src_offset]), data_len);
   uint32_t memmove_orig_stop = get_cycle_count();
 
+  memmove_(&(actual[dest_offset]), &(actual[src_offset]), data_len);
   uint32_t memmove_new_start = get_cycle_count();
   memmove_(&(actual[dest_offset]), &(actual[src_offset]), data_len);
   uint32_t memmove_new_stop = get_cycle_count();
